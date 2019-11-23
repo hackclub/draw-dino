@@ -13,7 +13,7 @@ const sideStyle = {
   justifyContent: 'center',
   textAlign: 'center',
   color: 'white',
-  background: '#222'
+  background: '#333'
 }
 
 const rightStyle = {
@@ -30,7 +30,7 @@ const subStyle = {
 const imageStyle = {
   maxWidth: '100%',
   borderRadius: '0.5em',
-  boxShadow: 'rgba(0, 0, 0, 0.1) 0 0 2em'
+  boxShadow: 'rgba(0, 0, 0, 1) 0 0 1em, rgba(255, 255, 255, 0.1) 0 0 5em'
 }
 
 const Step = ({subtitle, image, children}) => (
