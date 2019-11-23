@@ -9,6 +9,11 @@ const styleColored = {
   fontSize: '1.1rem',
 }
 
+const styleInput = {
+  borderRadius: '10px',
+  fontSize: '1.5rem'
+}
+
 export default class extends Component {
   state = {
     dinoName: ''
@@ -26,7 +31,7 @@ export default class extends Component {
         <Meta />
         <Step image="drawing-dino.gif">
           <p>Draw your dino. Once you've got one, type the name of the dino here:</p>
-          <AutosizeInput type="text" value={this.state.dinoName} onChange={this.changeDinoName} placeholder="drawing-dino" />
+          <AutosizeInput type="text" value={this.state.dinoName} onChange={this.changeDinoName} placeholder="drawing-dino" inputStyle={styleInput} />
         </Step>
         <Step image="star.gif" subtitle="✨⭐️✨">
           <p>
