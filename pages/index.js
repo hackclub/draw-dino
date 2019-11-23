@@ -24,7 +24,7 @@ export default class extends Component {
     return (
       <>
         <Meta />
-        <Step image="drawing-dino.png">
+        <Step image="drawing-dino.gif">
           <p>Draw your dino. Once you've got one, type the name of the dino here:</p>
           <AutosizeInput type="text" value={this.state.dinoName} onChange={this.changeDinoName} placeholder="drawing-dino" />
         </Step>
