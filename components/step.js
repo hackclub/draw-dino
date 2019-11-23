@@ -12,13 +12,14 @@ const sideStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  background: '#eee',
+  color: 'white',
+  background: '#222'
 }
 
 const rightStyle = {
-  color: 'white',
   padding: '3em',
-  background: '#222'
+  background: '#eee',
+  color: '#222'
 }
 
 const subStyle = {

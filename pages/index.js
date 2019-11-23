@@ -7,12 +7,6 @@ import Meta from '../components/meta'
 const styleColored = {
   fontWeight: 'bold',
   fontSize: '1.1rem',
-  border: '1px solid',
-  borderRadius: '.1em'
-}
-
-const styleInput = {
-
 }
 
 export default class extends Component {
