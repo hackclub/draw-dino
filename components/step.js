@@ -33,21 +33,19 @@ const imageStyle = {
   boxShadow: 'rgba(0, 0, 0, 1) 0 0 1em, rgba(255, 255, 255, 0.1) 0 0 5em'
 }
 
-const Step = ({subtitle, image, imageLink, children}) => (
+const Step = ({ subtitle, image, imageLink, children }) => (
   <div style={containerStyle}>
     <div style={sideStyle}>
-    {image && (
-      <>
-      <a target="_blank" href={imageLink}>
-        <img src={image} style={imageStyle} />
-      </a>
-        <p style={subStyle}>{subtitle || image}</p>
+      {image && (
+        <>
+          <a target="_blank" href={imageLink}>
+            <img src={image} style={imageStyle} />
+          </a>
+          <p style={subStyle}>{subtitle || image}</p>
         </>
-    )}
+      )}
     </div>
-    <div style={{...sideStyle, ...rightStyle}}>
-      {children}
-    </div>
+    <div style={{ ...sideStyle, ...rightStyle }}>{children}</div>
   </div>
 )
 
