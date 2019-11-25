@@ -91,7 +91,7 @@ export default class extends Component {
         <Step
           image="start-editing-readme.gif"
           imageLink="start-editing-readme.mp4"
-          subtitle="Find and edit README.md"
+          subtitle="Find README.md"
         >
           <p>Scroll through the list of files & find "README.md"</p>
           <p>To edit the file, click it & click the ✎ icon.</p>
@@ -99,7 +99,7 @@ export default class extends Component {
         <Step
           image="edit-readme.gif"
           imageLink="edit-readme.mp4"
-          subtitle="Find and edit README.md"
+          subtitle="Add your dino in the README.md"
         >
           <p>Scroll through the list of files & find "README.md"</p>
           <p>To edit the file, click it & click the ✎ icon.</p>
