@@ -103,11 +103,10 @@ export default class extends Component {
         >
           <p>Scroll through the list of files & find "README.md"</p>
           <p>To edit the file, click it & click the ✎ icon.</p>
-          <pre>
-            <code>
-              "{this.getName()}" ![]({this.getName()})
-            </code>
-          </pre>
+          <pre><code>
+            "{this.getName()}"
+            ![]({this.getName()})
+          </code></pre>
           <p>
             Below "Commit changes", type{" "}
             <strong>Add {this.getName()} to README</strong> in the first text
@@ -122,15 +121,17 @@ export default class extends Component {
         </Step>
         <Step image="create-pr.gif" imageLink="create-pr.mp4">
           <p>
-            Now if you go to
+            Go back to{' '}
             <a target="_blank" href="https://github.com/hackclub/dinosaurs">
               https://github.com/hackclub/dinosaurs
-            </a>
-            , you should see a green button that says
+            </a>{' '}
+            and click{' '}
             <span style={{ ...styleColored, color: "rgb(52, 208, 88)" }}>
               Compare & pull request
             </span>
-            . Click it, then click
+            .
+            </p>
+            <p> Then click{' '}
             <span style={{ ...styleColored, color: "rgb(52, 208, 88)" }}>
               Create pull request
             </span>
