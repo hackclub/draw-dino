@@ -24,9 +24,24 @@ export default class extends Component {
   getName = () => this.state.dinoName || 'YOUR-DINO-NAME'
 
   render() {
+    const easterEggs = [
+      'https://youtu.be/kRpODt0rflA',
+      'https://youtu.be/Cw_f4OgW0vQ',
+      'https://youtu.be/SXDcpkbkItw',
+      'https://youtu.be/51reoULiSjI'
+    ]
+    const eggLink = easterEggs[Math.floor(easterEggs.length * Math.random())]
     return (
       <>
         <Meta />
+        <Step image="motivational-dino.png" imageLink={eggLink}>
+          <h1>Pull Requests</h1>
+          <p>
+            <em>
+            If you already know how to submit PRs, go <a target="_blank" href="https://github.com/hackclub/dinosaurs/issues/29">here</a>.
+            </em>
+          </p>
+        </Step>
         <Step image="drawing-dino.gif" imageLink="drawing-dino.gif">
           <p>
             Draw your dino. Once you've got one, type the name of the dino here:
