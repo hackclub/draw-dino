@@ -93,7 +93,7 @@ export default class extends Component {
         >
           <p>Click "Upload files" and add your dino image</p>
           <p>
-            Below "Commit changes", type <strong>Add {this.getName()}</strong>{" "}
+            Below "Commit changes", type <span style={quoteStyle}>“Add {this.getName()}”</span>{" "}
             in the first text box
           </p>
           <p>
