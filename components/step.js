@@ -19,6 +19,7 @@ const sideStyle = {
 const rightStyle = {
   padding: '3em',
   background: '#eee',
+  background: 'linear-gradient(#eee, #eaeaea)',
   color: '#222'
 }
 
