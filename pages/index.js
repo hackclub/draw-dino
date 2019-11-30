@@ -21,7 +21,7 @@ export default class extends Component {
 
   changeDinoName = e => this.setState({ dinoName: e.target.value })
 
-  getName = () => this.state.dinoName || 'YOUR-DINO-NAME'
+  getName = () => this.state.dinoName.replace(/\s/g, '-') || 'YOUR-DINO-NAME'
 
   render() {
     const easterEggs = [
