@@ -152,6 +152,14 @@ export default class extends Component {
             </span>
           </p>
         </Step>
+        <Step>
+          <h1>Get the badge</h1>
+          <p>
+            Type in your Slack username, but <strong>be careful not to @tag</strong> if you have
+            a different username between Slack and GitHub you might be
+            notifying someone random.
+          </p>
+        </Step>
       </>
     )
   }
