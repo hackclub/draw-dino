@@ -25,7 +25,6 @@ export default () => (
       ${fontImport('Phantom Sans', '800', 'PhantomSans0.6-Bold')}
       ${fontImport('Phantom Sans', 'italic', 'PhantomSans0.6-Italic')}
 
-
       body {
         margin: 0;
         font-family: 'Phantom Sans', 'Roboto', sans-serif;
