@@ -1,6 +1,9 @@
 const containerStyle = {
   width: '100%',
   height: '100vh',
+  minHeight: '30em',
+  maxHeight: '1024px',
+  overflow: 'hidden',
   background: 'white',
   display: 'grid',
   gridTemplateColumns: '50% 50%'
