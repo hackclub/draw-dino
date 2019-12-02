@@ -1,5 +1,7 @@
 import Scroll from 'react-scroll'
 
+import ProgressButton from './progressButton'
+
 const containerStyle = {
   width: '100%',
   height: '100vh',
@@ -19,6 +21,7 @@ const sideStyle = {
   textAlign: 'center',
   color: 'white',
   background: '#333',
+  position: 'relative',
 }
 
 const rightStyle = {
@@ -79,7 +82,7 @@ export default ({
       </div>
       <div style={{ ...sideStyle, ...rightStyle }}>
         {children}
-        <button onClick={handleClick}>Next step</button>
+        <ProgressButton onClick={handleClick} active={index == progress} />
       </div>
     </div>
   )
