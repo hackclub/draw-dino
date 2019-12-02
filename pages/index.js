@@ -3,6 +3,7 @@ import AutosizeInput from 'react-input-autosize'
 
 import Step from '../components/step'
 import Meta from '../components/meta'
+import Intro from '../components/intro'
 
 const styleColored = {
   fontWeight: 'bold',
