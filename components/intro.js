@@ -7,15 +7,19 @@ const containerStyle = {
   margin: 0,
   background: 'black',
   fontFamily: "'Bellefair', serif",
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 }
 
 const bannerStyle = {
   background: '#222',
-  boxShadow: '0 0 15vh inherit',
+  boxShadow: '0 0 15vh 15vh #222',
   textAlign: 'center',
   color: 'white',
-  display: 'inline-block',
   margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column'
 }
 
 const supertitleStyle = {
@@ -46,15 +50,14 @@ const footerStyle = {
 
 export default () => (
   <>
-    <canvas></canvas>
     <div style={containerStyle}>
       <div style={bannerStyle}>
         <p style={supertitleStyle}>Orpheus the Dinosaur in...</p>
         <h1 style={titleStyle}>“Requesting a&nbsp;Pull”</h1>
         <p style={subtitleStyle}>
-          An “Inter-Active” Primer to Submit Pull Requests
+          Or, An “Inter-Active” Primer to Submit Pull Requests
         </p>
-        <p>A HACK CLUB PRODUCTION</p>
+        {/* <p>A HACK CLUB PRODUCTION</p> */}
         <div style={footerStyle}>
           <p>© COPYWRONG THE HACK FOUNDATION</p>
           <p>ALL RIGHTS RESERVED</p>
