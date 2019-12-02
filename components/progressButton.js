@@ -9,7 +9,10 @@ export default ({ onClick, active }) => (
         font-family: 'Bellefair', serif;
         font-size: 1.5em;
         font-weight: ${active ? 'bold' : 'regular'};
+        opacity: ${active ? 1 : 0.6};
         position: absolute;
+        margin-bottom: 6em;
+        margin-right: 6em;
         bottom: 0;
         right: 0;
       }
