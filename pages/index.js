@@ -123,8 +123,7 @@ export default class extends Component {
           imageLink="steps/edit-readme.mp4"
           subtitle="Add your dino in the README.md"
         >
-          <p>Scroll through the list of files & find “README.md”</p>
-          <p>To edit the file, click it & click the ✎ icon.</p>
+          <p>Add the following lines to the bottom of the file:</p>
           <pre>
             <code>
             "{this.getName()}"
