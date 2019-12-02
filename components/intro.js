@@ -9,7 +9,7 @@ const containerStyle = {
   fontFamily: "'Bellefair', serif",
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }
 
 const bannerStyle = {
@@ -19,7 +19,7 @@ const bannerStyle = {
   color: 'white',
   margin: '0 auto',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
 }
 
 const supertitleStyle = {

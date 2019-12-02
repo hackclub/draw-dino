@@ -82,7 +82,11 @@ export default ({
       </div>
       <div style={{ ...sideStyle, ...rightStyle }}>
         {children}
-        <ProgressButton onClick={handleClick} active={index == progress} />
+        <ProgressButton
+          onClick={handleClick}
+          index={index}
+          progress={progress}
+        />
       </div>
     </div>
   )
