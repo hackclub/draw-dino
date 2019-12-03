@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <!-- From the tutorial at http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/#demo-tools -->
+  <head>
+    <!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="canvas-toBlob.js"></script>
+    <script type="text/javascript" src="FileSaver.js"></script>
+  </head>
+  <body>
+    <div id="toolsDiv">
+      <button id="thinButton">✏️ Draw thin</button>
+      <button id="thickButton">🖌 Draw thick</button>
+      <button id="eraseButton">💄 Eraser tool</button>
+      <button id="saveButton">💾 Save masterpiece</button>
+    </div>
+    <div id="canvasDiv"></div>
+    <img src="" id="mirror" />
+    <script type="text/javascript" src="sketch.js"></script>
+  </body>
+</html>
