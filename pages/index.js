@@ -45,7 +45,7 @@ export default () => {
     <>
       <Meta />
       <Intro />
-      <Step
+      {/* <Step
         image="steps/motivational-dino.png"
         imageLink={eggLink}
         index={i++}
@@ -63,7 +63,7 @@ export default () => {
           </a>
           .
         </p>
-      </Step>
+      </Step> */}
       <Step
         image="steps/drawing-dino.gif"
         imageLink="steps/drawing-dino.gif"
@@ -73,7 +73,9 @@ export default () => {
         setProgress={setProgress}
       >
         <p>
-          Draw your dino. Once you've got one, type the name of the dino here:
+          Draw your dino by sketching it <a target="_blank" href="/sketch.html">here</a> (or use
+          your own drawing tools). Once you've got one, type the name of the
+          dino here:
         </p>
         <AutosizeInput
           type="text"
