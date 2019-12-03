@@ -20,7 +20,8 @@ canvas.setAttribute('width', canvasWidth)
 canvas.setAttribute('height', canvasHeight)
 canvas.setAttribute('id', 'canvas')
 const pixelation = 'image-rendering: crisp-edges; image-rendering: pixelated;'
-canvas.setAttribute('style', `${pixelation} width: ${canvasWidth * scaling}px; height: ${canvasHeight * scaling}px;`)
+const borders = 'border: 1px solid black;'
+canvas.setAttribute('style', `${pixelation} ${borders} width: ${canvasWidth * scaling}px; height: ${canvasHeight * scaling}px;`)
 canvasDiv.appendChild(canvas)
 if (typeof G_vmlCanvasManager != 'undefined') {
   canvas = G_vmlCanvasManager.initElement(canvas)
