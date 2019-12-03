@@ -19,7 +19,7 @@ canvas = document.createElement('canvas')
 canvas.setAttribute('width', canvasWidth)
 canvas.setAttribute('height', canvasHeight)
 canvas.setAttribute('id', 'canvas')
-const pixelation = 'image-rendering: pixelated;'
+const pixelation = 'image-rendering: crisp-edges; image-rendering: pixelated;'
 canvas.setAttribute('style', `${pixelation} width: ${canvasWidth * scaling}px; height: ${canvasHeight * scaling}px;`)
 canvasDiv.appendChild(canvas)
 if (typeof G_vmlCanvasManager != 'undefined') {
