@@ -11,6 +11,7 @@ var clicks = []
 var templateVisibility = true
 var size = thinSize
 var color = drawColor
+var unsavedChanges = false
 var paint
 
 // Initialization
@@ -53,10 +54,18 @@ document.querySelector('#saveButton').addEventListener('click', e => {
   const filename = prompt("Name your dino drawing", "pirate-dino")
   if (filename) {
     canvas.toBlob(blob => {
-      saveAs(blob, filename + '.jpg')
+      saveAs(blob, filename + '.png')
+      unsavedChanges = false
     })
   }
 })
+
+// double check with user before closing the page
+window.addEventListener('beforeunload', e => {
+  if (unsavedChanges) {
+    e.returnValue = 'You have unsaved changes that will be lost.';
+  }
+});
 
 // sketching
 function addClick(x, y, dragging) {
@@ -94,6 +103,7 @@ function redraw() {
 }
 
 canvas.addEventListener('mousedown', e => {
+  unsavedChanges = true
   mouseX = (e.pageX - canvas.offsetLeft) / scaling
   mouseY = (e.pageY - canvas.offsetTop) / scaling
   addClick(mouseX, mouseY, false)
