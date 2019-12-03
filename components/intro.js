@@ -2,7 +2,6 @@ const containerStyle = {
   width: '100%',
   height: '100vh',
   minHeight: '30em',
-  maxHeight: '1024px',
   overflow: 'hidden',
   margin: 0,
   background: 'black',
@@ -50,14 +49,31 @@ const footerStyle = {
 
 export default () => (
   <>
+    <style jsx>{`
+      @keyframes blur_in {
+        0% { filter: blur(50px); text-shadow: 0 0 0 0 !important; }
+        35% { filter: blur(5px); text-shadow: 0 0 0 0 !important; }
+        45% { filter: blur(20px); text-shadow: 0 0 0 0 !important; }
+        75% { filter: blur(10px); text-shadow: 0 0 0 0 !important; }
+        90% { filter: blur(5px); text-shadow: 0 0 0 0 !important; }
+        100% { filter: blur(0px); text-shadow: 0 0 0 0 !important; }
+      }
+
+      p, h1 {
+        animation: blur_in;
+        animation-duration: 1s;
+        text-shadow: 0 0 0.2rem #eee;
+        color: transparent;
+      }
+    `}</style>
     <div style={containerStyle}>
       <div style={bannerStyle}>
-        <p style={supertitleStyle}>Orpheus the Dinosaur in...</p>
+        <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
         <h1 style={titleStyle}>“Requesting a&nbsp;Pull”</h1>
         <p style={subtitleStyle}>
           Or, An “Inter-Active” Primer to Submit Pull Requests
         </p>
-        {/* <p>A HACK CLUB PRODUCTION</p> */}
+        <p>The 12-part epic, staring Orpheus the Dinosaur</p>
         <div style={footerStyle}>
           <p>© COPYWRONG THE HACK FOUNDATION</p>
           <p>ALL RIGHTS RESERVED</p>
