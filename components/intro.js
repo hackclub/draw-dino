@@ -28,9 +28,10 @@ const supertitleStyle = {
 const titleStyle = {
   fontSize: '8em',
   textShadow: `
-1px 1px 1px #ddd,
-2px 2px 1px #ccc,
-3px 3px 1px #bbb,
+1px 1px 2px #ddd,
+2px 2px 2px #ccc,
+3px 3px 2px #bbb,
+4px 4px 4px #aaa,
 0 0 1em black`,
 }
 
