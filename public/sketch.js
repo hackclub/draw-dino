@@ -8,6 +8,7 @@ const thinSize = 2
 const thickSize = 4
 
 var clicks = []
+var templateVisibility = true
 var size = thinSize
 var color = drawColor
 var paint
@@ -25,6 +26,11 @@ if (typeof G_vmlCanvasManager != 'undefined') {
   canvas = G_vmlCanvasManager.initElement(canvas)
 }
 context = canvas.getContext('2d')
+const templateImage = new Image()
+templateImage.src = 'template.jpg'
+templateImage.addEventListener('load', e => {
+  redraw()
+})
 
 // Buttons & tools
 document.querySelector('#thickButton').addEventListener('click', e => {
@@ -37,6 +43,10 @@ document.querySelector('#thinButton').addEventListener('click', e => {
 })
 document.querySelector('#eraseButton').addEventListener('click', e => {
   color = backgroundColor
+})
+document.querySelector('#templateButton').addEventListener('click', e => {
+  templateVisibility = !templateVisibility
+  redraw()
 })
 document.querySelector('#saveButton').addEventListener('click', e => {
   canvas.toBlob(blob => {
@@ -54,6 +64,10 @@ function addClick(x, y, dragging) {
 function redraw() {
   context.fillStyle = backgroundColor
   context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+
+  if (templateVisibility) {
+    context.drawImage(templateImage, context.canvas.width / 5, context.canvas.height / 5, context.canvas.width * 3 / 5, context.canvas.height * 3 / 5)
+  }
 
   context.strokeStyle = drawColor
 
