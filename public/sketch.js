@@ -141,4 +141,4 @@ genTooltip('thinButton', 'thin-button.gif', 'Draw a <span style="font-weight: 10
 genTooltip('thickButton', 'thick-button.gif', 'Draw a <span style="font-weight: 800;">thick</span> black line')
 genTooltip('templateButton', 'template-button.gif', 'Show a dino outline you can use as a starting point. You can toggle it on and off anytime.')
 genTooltip('eraseButton', 'erase-button.gif', 'Draw with a <span style="background: white; color: black; border-radius: 5px;">white</span> marker to erase mistakes or cut out black parts of an image. Also covers the dino template.')
-genTooltip('saveButton', 'save-button.gif', 'Saves your drawing as a JPG to your computer. You don’t need to include a file extension. <span style="color: #ff6700; font-weight: bold;">This will not save your dino on this website.</style>')
+genTooltip('saveButton', 'save-button.gif', 'Saves the drawing to your computer. Automatically adds a file extension. <span style="color: #ff6700; font-weight: bold;">This will not save your dino on this website.</style>')
