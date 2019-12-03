@@ -34,7 +34,7 @@ export default ({ onClick, index, progress }) => {
         }
       `}</style>
       <button onClick={onClick}>
-        <img src={active ? "next-black.png" : "back-black.png" } />
+        <img src={active ? 'next-black.png' : 'back-black.png'} />
       </button>
     </>
   )
