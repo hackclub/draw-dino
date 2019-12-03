@@ -5,8 +5,6 @@ export default ({ onClick, index, progress }) => {
     <>
       <style jsx>{`
         button {
-          // background: linear-gradient(to right, rgba(36,31,31,1) 0%, rgba(36,31,31,1) 32%, rgba(74,71,70,1) 100%);
-          // color: #fff;
           background: none;
           border: none;
           font-family: 'Bellefair', serif;
@@ -14,8 +12,8 @@ export default ({ onClick, index, progress }) => {
           font-weight: ${active ? 'bold' : 'regular'};
           opacity: ${active ? 1 : 0.6};
           position: absolute;
-          margin-bottom: 6em;
-          margin-right: 6em;
+          margin-bottom: 10%;
+          margin-right: 10%;
           bottom: 0;
           right: 0;
           text-align: left;
@@ -27,12 +25,16 @@ export default ({ onClick, index, progress }) => {
         }
 
         p {
-          font-size: 1rem;
+          font-size: 2rem;
+          transform: rotate(-15deg);
+        }
+
+        img {
+          width: 5rem;
         }
       `}</style>
       <button onClick={onClick}>
-        Continue...
-        <p>to step {index + 2}</p>
+        <img src={active ? "next-black.png" : "back-black.png" } />
       </button>
     </>
   )
