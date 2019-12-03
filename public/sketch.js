@@ -49,9 +49,12 @@ document.querySelector('#templateButton').addEventListener('click', e => {
   redraw()
 })
 document.querySelector('#saveButton').addEventListener('click', e => {
-  canvas.toBlob(blob => {
-    saveAs(blob, `babydino.jpg`)
-  })
+  const filename = prompt("Filename", "babydino.jpg")
+  if (filename) {
+    canvas.toBlob(blob => {
+      saveAs(blob, filename)
+    })
+  }
 })
 
 // sketching
