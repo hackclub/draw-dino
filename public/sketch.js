@@ -144,30 +144,53 @@ function redraw() {
   })
 }
 
-canvas.addEventListener('mousedown', e => {
+function clickStart(event) {
+  event.preventDefault()
   unsavedChanges = true
-  mouseX = (e.pageX - canvas.offsetLeft) / scaling
-  mouseY = (e.pageY - canvas.offsetTop) / scaling
+  mouseX = (event.pageX - canvas.offsetLeft) / scaling
+  mouseY = (event.pageY - canvas.offsetTop) / scaling
   addClick(mouseX, mouseY, false)
   paint = true
   redraw()
+}
+
+canvas.addEventListener('mousedown', e => {
+  clickStart(e)
+})
+canvas.addEventListener('touchstart', e => {
+  clickStart(e)
 })
 
-canvas.addEventListener('mousemove', e => {
+function clickDrag(event) {
+  event.preventDefault()
   if (paint) {
-    mouseX = (e.pageX - canvas.offsetLeft) / scaling
-    mouseY = (e.pageY - canvas.offsetTop) / scaling
+    mouseX = (event.pageX - canvas.offsetLeft) / scaling
+    mouseY = (event.pageY - canvas.offsetTop) / scaling
     addClick(mouseX, mouseY, true)
     redraw()
   }
+}
+canvas.addEventListener('mousemove', e => {
+  clickDrag(e)
+})
+canvas.addEventListener('touchmove', e => {
+  clickDrag(e)
 })
 
+function clickStop() {
+  paint = false
+}
 canvas.addEventListener('mouseup', e => {
-  paint = false
+  clickStop()
 })
-
 canvas.addEventListener('mouseleave', e => {
-  paint = false
+  clickStop()
+})
+canvas.addEventListener('touchstop', e => {
+  clickStop()
+})
+canvas.addEventListener('touchcancel', e => {
+  clickStop()
 })
 
 // tooltips
