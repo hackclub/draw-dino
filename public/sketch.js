@@ -50,19 +50,25 @@ document.querySelector('#templateButton').addEventListener('click', e => {
   templateVisibility = !templateVisibility
   redraw()
 })
-document.querySelector('#undoButton').addEventListener('click', e => {
+function undo() {
   const doneClicks = clicks.filter(click => !click.undone)
   if (doneClicks.length > 0) {
     doneClicks[doneClicks.length - 1].undone = true
     redraw()
   }
+}
+document.querySelector('#undoButton').addEventListener('click', e => {
+  undo()
 })
-document.querySelector('#redoButton').addEventListener('click', e => {
+function redo() {
   const recentUndoneClick = clicks.find(click => click.undone)
   if (recentUndoneClick) {
     recentUndoneClick.undone = false
     redraw()
   }
+}
+document.querySelector('#redoButton').addEventListener('click', e => {
+  redo()
 })
 document.querySelector('#saveButton').addEventListener('click', e => {
   const filename = prompt("Name your dino drawing", "pirate-dino")
@@ -71,6 +77,19 @@ document.querySelector('#saveButton').addEventListener('click', e => {
       saveAs(blob, filename + '.png')
       unsavedChanges = false
     })
+  }
+})
+
+document.addEventListener('keypress', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+    e.preventDefault()
+
+    undo()
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
+    e.preventDefault()
+
+    redo()
   }
 })
 
