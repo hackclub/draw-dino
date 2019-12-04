@@ -50,6 +50,20 @@ document.querySelector('#templateButton').addEventListener('click', e => {
   templateVisibility = !templateVisibility
   redraw()
 })
+document.querySelector('#undoButton').addEventListener('click', e => {
+  const doneClicks = clicks.filter(click => !click.undone)
+  if (doneClicks.length > 0) {
+    doneClicks[doneClicks.length - 1].undone = true
+    redraw()
+  }
+})
+document.querySelector('#redoButton').addEventListener('click', e => {
+  const recentUndoneClick = clicks.find(click => click.undone)
+  if (recentUndoneClick) {
+    recentUndoneClick.undone = false
+    redraw()
+  }
+})
 document.querySelector('#saveButton').addEventListener('click', e => {
   const filename = prompt("Name your dino drawing", "pirate-dino")
   if (filename) {
@@ -69,9 +83,16 @@ window.addEventListener('beforeunload', e => {
 
 // sketching
 function addClick(x, y, dragging) {
-  clicks.push({
-    x, y, dragging, size, color
-  })
+  if (dragging) {
+    // get the last click and add the coordinate
+    const lastClick = clicks[clicks.length - 1]
+    lastClick.points.push({x, y})
+  } else {
+    // when we start clicking, we'll delete the "undone" history for good
+    clicks = clicks.filter(click => !click.undone)
+    // create a new click
+    clicks.push({size, color, points: [ {x, y} ]})
+  }
 }
 
 function redraw() {
@@ -84,22 +105,24 @@ function redraw() {
 
   context.strokeStyle = drawColor
 
-  for (let i = 0; i < clicks.length; i++) {
-    let click = clicks[i]
-    let prevClick = clicks[i-1]
-
+  clicks.filter(clicks => !clicks.undone).forEach(click => {
     context.beginPath()
-    if (click.dragging && prevClick) {
-      context.moveTo(prevClick.x, prevClick.y)
-    } else {
-      context.moveTo(click.x - 1, click.y)
+    for (let i = 0; i < click.points.length; i++) {
+      context.beginPath()
+      let point = click.points[i]
+      let prevPoint = click.points[i - 1]
+      if (prevPoint) {
+        context.moveTo(prevPoint.x, prevPoint.y)
+      } else {
+        context.moveTo(point.x - 1, point.y)
+      }
+      context.lineTo(point.x, point.y)
+      context.closePath()
+      context.strokeStyle = click.color
+      context.lineWidth = click.size
+      context.stroke()
     }
-    context.lineTo(click.x, click.y)
-    context.closePath()
-    context.strokeStyle = click.color
-    context.lineWidth = click.size
-    context.stroke()
-  }
+  })
 }
 
 canvas.addEventListener('mousedown', e => {
