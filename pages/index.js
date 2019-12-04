@@ -29,7 +29,7 @@ export default () => {
   const [progress, setProgress] = useState(0)
 
   const getName = () => dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
-  const getFilename = () => getName() + '.jpg'
+  const getFilename = () => getName() + '.png'
 
   const easterEggs = [
     'https://youtu.be/kRpODt0rflA',
