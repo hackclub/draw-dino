@@ -1,5 +1,3 @@
-import ProgressButton from './progressButton'
-
 const containerStyle = {
   width: '100%',
   height: '100vh',
@@ -26,13 +24,11 @@ const bannerStyle = {
   padding: '1em',
 }
 
-const supertitleStyle = {
-  fontFamily: "'Bellefair', serif",
-}
-
 const titleStyle = {
   fontFamily: "'Yesteryear', cursive",
   fontSize: '8em',
+  padding: '1em',
+  paddingBottom: 0,
   fontStyle: 'italic',
   marginTop: 0,
   marginBottom: 0,
@@ -46,50 +42,19 @@ const titleStyle = {
 0.2em 0.2em 0.25em black`,
 }
 
-const subtitleStyle = {
-  fontSize: '2em',
-}
-
 const footerStyle = {
   fontSize: '0.5em',
   fontWeight: 'bold',
   textShadow: `
-1px 1px 1px #ddd,
-2px 2px 1px #ccc,
+0px 0px 2px #ddd,
+1px 1px 2px #ccc,
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress }) => (
+export default () => (
   <>
     <style jsx>{`
-      @keyframes blur_in {
-        0% {
-          filter: blur(50px);
-          text-shadow: 0 0 0 0 !important;
-        }
-        35% {
-          filter: blur(5px);
-          text-shadow: 0 0 0 0 !important;
-        }
-        45% {
-          filter: blur(20px);
-          text-shadow: 0 0 0 0 !important;
-        }
-        75% {
-          filter: blur(10px);
-          text-shadow: 0 0 0 0 !important;
-        }
-        90% {
-          filter: blur(5px);
-          text-shadow: 0 0 0 0 !important;
-        }
-        100% {
-          filter: blur(0px);
-          text-shadow: 0 0 0 0 !important;
-        }
-      }
-
-      div > * {
+      div > div > * {
         animation: blur_in;
         animation-duration: 1s;
       }
@@ -104,26 +69,15 @@ export default ({ index, progress, setProgress }) => (
         color: transparent;
       }
 
-      button {
-        animation: vertical-float;
-        animation-duration: 1s;
+      a {
+        font-size: 1em;
+        text-decoration: none;
       }
-
-      @vertical-float {
-        0% {
-          transform: translateY(5px);
-          color: blue !important;
-        }
-        50% {
-          transform: translateY(0px);
-        }
-        100% {
-          transform: translateY(5px);
-        }
+      a > img {
+        height: 6em;
       }
-
-      button {
-        color: blue !important;
+      a > p {
+        margin-top: 0;
       }
     `}</style>
     <div style={containerStyle}>
@@ -159,29 +113,19 @@ export default ({ index, progress, setProgress }) => (
             transform: 'rotate(270deg)',
           }}
         />
-        <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
-        <p>Orpheus the Dinosaur stars in...</p>
-        <h1 style={titleStyle}>
-          “Requesting
-          <br />
-          a&nbsp;Pull”
-        </h1>
-        <p style={subtitleStyle}>
-          Or, An “Inter-Active” Primer to Submit Pull Requests
+        <h1 style={titleStyle}>The End</h1>
+        <p style={{ fontSize: '2em' }}>
+          Orpheus says: <br />
+          “Sign in to Slack for an exclusive emoji!”
         </p>
-        <ProgressButton
-          index={index}
-          progress={progress}
-          setProgress={setProgress}
-        >
-          <p style={{ margin: 0, fontSize: '3em', fontWeight: 'bold' }}>
-            Click to Continue
-          </p>
-          <img
-            src="decorative-bottom.png"
-            style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
-          />
-        </ProgressButton>
+        <a href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=2210535565.713809622784">
+          <img src="slack.svg" />
+          <p>Sign in with Slack</p>
+        </a>
+        <img
+          src="decorative-bottom.png"
+          style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
+        />
         <div style={footerStyle}>
           <p>© COPYWRONG THE HACK FOUNDATION</p>
           <p>ALL RIGHTS RESERVED</p>

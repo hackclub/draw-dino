@@ -71,11 +71,16 @@ document.querySelector('#redoButton').addEventListener('click', e => {
   redo()
 })
 document.querySelector('#saveButton').addEventListener('click', e => {
-  const filename = prompt("Name your dino drawing", "pirate-dino")
+  const filename = prompt("Name your dino drawing", "dino")
   if (filename) {
     canvas.toBlob(blob => {
       saveAs(blob, filename + '.png')
       unsavedChanges = false
+
+      // If this is running as an embed, send the file off to the parent window
+      if (window.parent) {
+        window.parent.postMessage({filename: filename + '.png', blob}, "*")
+      }
     })
   }
 })
