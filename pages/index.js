@@ -62,20 +62,22 @@ export default () => {
   ]
   const eggLink = easterEggs[Math.floor(easterEggs.length * Math.random())]
 
+  let index = 0
   return (
     <>
       <Meta />
-      <Step revealed={0 <= progress}>
-        <Intro setProgress={setProgress} index={0} progress={progress} />
+      <Step revealed={index <= progress}>
+        <Intro setProgress={setProgress} index={index} progress={progress} />
       </Step>
+      {console.log(index++)}
 
-      <Step revealed={1 <= progress}>
+      <Step revealed={index <= progress}>
         <Split
           image="steps/motivational-dino.png"
           subtitle="you’ve got this"
           imageLink={eggLink}
           setProgress={setProgress}
-          index={1}
+          index={index}
           progress={progress}
         >
           <h1>Pull Requests</h1>
@@ -96,21 +98,25 @@ export default () => {
           </p>
         </Split>
       </Step>
-      <Step revealed={2 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <SketchEmbed
           setDinoName={setDinoName}
-          index={2}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         />
       </Step>
-      <Step revealed={3 <= progress}>
+      {console.log(index++)}
+
+      {/* <Step revealed={index <= progress}>
         <Split
           image="steps/drawing-dino.gif"
           imageLink="steps/drawing-dino.gif"
           subtitle={getFilename()}
           setProgress={setProgress}
-          index={3}
+          index={index}
           progress={progress}
         >
           <p>
@@ -130,12 +136,14 @@ export default () => {
           />
         </Split>
       </Step>
-      <Step revealed={4 <= progress}>
+      {console.log(index++)}
+*/}
+      <Step revealed={index <= progress}>
         <Split
           image="steps/star.gif"
           imageLink="steps/star.mp4"
           subtitle="✨⭐️✨"
-          index={4}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -148,12 +156,14 @@ export default () => {
           </p>
         </Split>
       </Step>
-      <Step revealed={5 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/new-branch.gif"
           imageLink="steps/new-branch.mp4"
           subtitle="Create Branch: drawing-dino"
-          index={5}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -164,12 +174,14 @@ export default () => {
           <p>Click “Create branch: {getName()}”</p>
         </Split>
       </Step>
-      <Step revealed={6 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/upload.gif"
           imageLink="steps/upload.mp4"
           subtitle="Upload your masterpiece"
-          index={6}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -187,12 +199,14 @@ export default () => {
           </p>
         </Split>
       </Step>
-      <Step revealed={7 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/start-editing-readme.gif"
           imageLink="steps/start-editing-readme.mp4"
           subtitle="Find README.md"
-          index={7}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -200,12 +214,14 @@ export default () => {
           <p>To edit the file, click it & click the ✎ icon.</p>
         </Split>
       </Step>
-      <Step revealed={8 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/edit-readme.gif"
           imageLink="steps/edit-readme.mp4"
           subtitle="Add your dino in the README.md"
-          index={8}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -230,11 +246,13 @@ export default () => {
           </p>
         </Split>
       </Step>
-      <Step revealed={9 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/create-pr.gif"
           imageLink="steps/create-pr.mp4"
-          index={9}
+          index={index}
           progress={progress}
           setProgress={setProgress}
         >
@@ -258,7 +276,9 @@ export default () => {
           </p>
         </Split>
       </Step>
-      <Step revealed={10 <= progress}>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Ending />
       </Step>
     </>
