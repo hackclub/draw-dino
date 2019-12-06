@@ -67,7 +67,6 @@ analytics.page();
 
       a {
         color: inherit;
-        font-weight: bold;
       }
 
 
