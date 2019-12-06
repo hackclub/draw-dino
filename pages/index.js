@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import AutosizeInput from 'react-input-autosize'
 
 import Step from '../components/step'
@@ -30,26 +30,6 @@ const subtitleStyle = {
 export default () => {
   const [dinoName, setDinoName] = useState('')
   const [progress, setProgress] = useState(0)
-  // const [progress, setProgress] = useState(() => {
-  //   const params = {}
-  //   window.location.search.replace('?', '').split('&').every(kvString => {
-  //     let [key, value] = kvString.split('=')
-  //     params[key] = value
-  //   })
-
-  //   return progress || 0
-  // })
-  // useEffect(() => {
-  //   const params = {}
-  //   window.location.search.replace('?', '').split('&').every(kvString => {
-  //     let [key, value] = kvString.split('=')
-  //     params[key] = value
-  //   })
-
-  //   if (progress == 0) {
-  //     setProgress(params['progress'])
-  //   }
-  // })
 
   const getName = () => dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
@@ -73,14 +53,33 @@ export default () => {
 
       <Step revealed={index <= progress}>
         <Split
-          image="steps/motivational-dino.png"
-          subtitle="you’ve got this"
+          image="steps/dino-wallpaper.jpg"
+          subtitle="Join the club"
           imageLink={eggLink}
           setProgress={setProgress}
           index={index}
           progress={progress}
         >
-          <h1>Pull Requests</h1>
+          {/* <h1>Quick! Get in!</h1> */}
+          <p>
+            We take pride in having the highest-quality selection of
+            poorly-drawn dinos anywhere in the universe™. Anyone who sends us a
+            dino drawing will earn the dinoisseur badge, as well as get an
+            exclusive emoji on Slack.
+          </p>
+          <img
+            src="dinoisseur.png"
+            style={{ borderRadius: '10%', height: '3em' }}
+          />
+          <p>
+            Hack Club stores all it's code on GitHub, including{' '}
+            <a href="https://github.com/maxwofford/excitedcornsilkpackages">
+              this&nbsp;website
+            </a>
+            , {/* AHAHAHAHAH, no one shall ever find this message!!! */}
+            and the best way to make changes (such as adding a dinosaur) is
+            by submitting a pull request on GitHub.
+          </p>
           <p>
             The first step is to make our dino. Don't worry about setup– we've
             included a full dino-drawing-a-tron below for you to use. Just click
