@@ -1,5 +1,6 @@
 const containerStyle = {
   width: '100%',
+  overflow: 'scrollY',
 }
 
 const hiddenStyle = {

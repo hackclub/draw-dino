@@ -1,16 +1,5 @@
 import ProgressButton from './progressButton'
 
-const containerStyle = {
-  width: '100%',
-  height: '100vh',
-  minHeight: '30em',
-  maxHeight: '2048px',
-  overflow: 'hidden',
-  background: 'white',
-  display: 'grid',
-  gridTemplateColumns: '50% 50%',
-}
-
 const sideStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -20,6 +9,7 @@ const sideStyle = {
   color: 'white',
   background: '#333',
   position: 'relative',
+  maxHeight: '100%',
 }
 
 const rightStyle = {
@@ -27,6 +17,7 @@ const rightStyle = {
   background: '#eee',
   background: 'linear-gradient(#eee, #eaeaea)',
   color: '#222',
+  overflowY: 'auto',
 }
 
 const subStyle = {
@@ -35,7 +26,7 @@ const subStyle = {
 }
 
 const imageStyle = {
-  maxWidth: '100%',
+  maxWidth: '90%',
   borderRadius: '0.5em',
   boxShadow: 'rgba(0, 0, 0, 1) 0 0 1em, rgba(255, 255, 255, 0.1) 0 0 5em',
 }
@@ -58,30 +49,48 @@ export default ({
   index,
   children,
 }) => (
-  <div style={containerStyle}>
-    <div style={sideStyle}>
-      {image && (
-        <>
-          <a target="_blank" href={imageLink}>
-            <img src={image} style={imageStyle} />
-          </a>
-          <p style={subStyle}>{subtitle || image}</p>
-        </>
-      )}
+  <>
+    <style jsx>{`
+      .container {
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      @media (min-width: 992px) {
+        .container {
+          overflow: hidden;
+          display: grid;
+          grid-template-columns: 50% 50%;
+        }
+      }
+    `}</style>
+    <div className="container">
+      <div style={sideStyle}>
+        {image && (
+          <>
+            <a target="_blank" href={imageLink}>
+              <img src={image} style={imageStyle} />
+            </a>
+            <p style={subStyle}>{subtitle || image}</p>
+          </>
+        )}
+      </div>
+      <div style={{ ...sideStyle, ...rightStyle }}>
+        {children}
+        <ProgressButton
+          setProgress={setProgress}
+          index={index}
+          progress={progress}
+          style={progressStyle}
+        >
+          <img
+            src={index == progress ? 'next-black.png' : 'back-black.png'}
+            style={{ width: '100%' }}
+          />
+        </ProgressButton>
+      </div>
     </div>
-    <div style={{ ...sideStyle, ...rightStyle }}>
-      {children}
-      <ProgressButton
-        setProgress={setProgress}
-        index={index}
-        progress={progress}
-        style={progressStyle}
-      >
-        <img
-          src={index == progress ? 'next-black.png' : 'back-black.png'}
-          style={{ width: '100%' }}
-        />
-      </ProgressButton>
-    </div>
-  </div>
+  </>
 )

@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import Scroll from 'react-scroll'
 
+import ProgressButton from './progressButton'
+
 const containerStyle = {
   height: '100vh',
+  position: 'relative',
 }
 
 const iframeStyle = {
@@ -10,6 +13,15 @@ const iframeStyle = {
   height: '100%',
   margin: 0,
   border: 'none',
+}
+
+const progressStyle = {
+  position: 'absolute',
+  marginBottom: '10%',
+  marginRight: '10%',
+  bottom: 0,
+  right: 0,
+  width: '10em',
 }
 
 export default ({ setDinoName, progress, index, setProgress }) => {
@@ -34,6 +46,17 @@ export default ({ setDinoName, progress, index, setProgress }) => {
   return (
     <div style={containerStyle}>
       <iframe src="sketch.html" style={iframeStyle} />
+      <ProgressButton
+        setProgress={setProgress}
+        index={index}
+        progress={progress}
+        style={progressStyle}
+      >
+        <img
+          src={index == progress ? 'next-black.png' : 'back-black.png'}
+          style={{ width: '100%' }}
+        />
+      </ProgressButton>
     </div>
   )
 }
