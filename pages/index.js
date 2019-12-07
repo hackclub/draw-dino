@@ -36,16 +36,20 @@ export default () => {
 
   useEffect(() => {
     const result = {}
-    window.location.search.replace('?', '').split('&').forEach(kvString => {
-      const [key, value] = kvString.split('=')
-      result[key] = value
-    })
+    window.location.search
+      .replace('?', '')
+      .split('&')
+      .forEach(kvString => {
+        const [key, value] = kvString.split('=')
+        result[key] = value
+      })
 
     setGithub(result.username)
     setInviteStatus(result.inviteStatus)
   })
 
-  const getName = () => (github + dinoName.replace(/[\s\.]/g, '-')) || 'YOUR-DINO-NAME'
+  const getName = () =>
+    github + dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
 
   const easterEggs = [
@@ -65,10 +69,10 @@ export default () => {
       </Step>
       {console.log(index++)}
 
-      <Step revealed={index <= progress}>
+      {/* <Step revealed={index <= progress}>
         <Slack setProgress={setProgress} index={index} progress={progress} />
       </Step>
-      {console.log(index++)}
+      {console.log(index++)} */}
 
       <Step revealed={index <= progress}>
         <Split
@@ -82,8 +86,8 @@ export default () => {
           <h1>We take pride in our poorly-drawn dinos™</h1>
           <p>
             And we've got the best collection of anywhere in the universe™.
-            Anyone who sends us a dino drawing will earn the dinoisseur
-            badge, as well as get an exclusive emoji on Slack.
+            Anyone who sends us a dino drawing will earn the dinoisseur badge,
+            as well as get an exclusive emoji on Slack.
           </p>
           <img
             src="dinoisseur.png"
@@ -177,16 +181,18 @@ export default () => {
       {console.log(index++)}
 
       <Step revealed={index <= progress}>
-        <Split
-          index={index}
-          progress={progress}
-          setProgress={setProgress}
-        >
+        <Split index={index} progress={progress} setProgress={setProgress}>
           <p>
-            We've given you edit access to the dinosaurs repo. Depending on your settings, it will already be accepted, or you'll need to  accept it here:
-            <a target="_blank" href="https://github.com/orgs/hackclub/teams/dinoisseurs">
+            We've given you edit access to the dinosaurs repo. Depending on your
+            settings, it will already be accepted, or you'll need to accept it
+            here:
+            <a
+              target="_blank"
+              href="https://github.com/orgs/hackclub/teams/dinoisseurs"
+            >
               https://github.com/orgs/hackclub/teams/dinoisseurs
-            </a>. If it doesn't show up there, check your email.
+            </a>
+            . If it doesn't show up there, check your email.
           </p>
           <p>Click next once you've accepted your invite</p>
         </Split>
