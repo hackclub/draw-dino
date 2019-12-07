@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AutosizeInput from 'react-input-autosize'
 
 import Step from '../components/step'
@@ -30,8 +30,21 @@ const subtitleStyle = {
 export default () => {
   const [dinoName, setDinoName] = useState('')
   const [progress, setProgress] = useState(0)
+  const [github, setGithub] = useState('')
+  const [inviteStatus, setInviteStatus] = useState('')
 
-  const getName = () => dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
+  useEffect(() => {
+    const result = {}
+    window.location.search.replace('?', '').split('&').forEach(kvString => {
+      const [key, value] = kvString.split('=')
+      result[key] = value
+    })
+
+    setGithub(result.username)
+    setInviteStatus(result.inviteStatus)
+  })
+
+  const getName = () => (github + dinoName.replace(/[\s\.]/g, '-')) || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
 
   const easterEggs = [
@@ -105,6 +118,7 @@ export default () => {
           index={index}
           progress={progress}
           setProgress={setProgress}
+          username={github}
         />
       </Step>
       {console.log(index++)}

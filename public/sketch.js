@@ -72,14 +72,24 @@ document.querySelector('#redoButton').addEventListener('click', e => {
 })
 document.querySelector('#saveButton').addEventListener('click', e => {
   const filename = prompt("Name your dino drawing", "dino")
+
+  const urlParams = {}
+  window.location.search.replace('?', '').split('&').forEach(kvString => {
+    const [key, value] = kvString.split('=')
+    urlParams[key] = value
+  })
+  const username = urlParams['username']
+
   if (filename) {
     canvas.toBlob(blob => {
-      saveAs(blob, filename + '.png')
+      let safeFileName = `${username}-${filename}`.replace(/[\s\.]/g, '-')
+
+      saveAs(blob, safeFileName + '.png')
       unsavedChanges = false
 
       // If this is running as an embed, send the file off to the parent window
       if (window.parent) {
-        window.parent.postMessage({filename: filename + '.png', blob}, "*")
+        window.parent.postMessage({filename: safeFileName + '.png', blob}, "*")
       }
     })
   }
