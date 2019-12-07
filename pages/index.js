@@ -4,6 +4,7 @@ import AutosizeInput from 'react-input-autosize'
 import Step from '../components/step'
 import Meta from '../components/meta'
 import Intro from '../components/intro'
+import Slack from '../components/slack'
 import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
@@ -65,6 +66,11 @@ export default () => {
       {console.log(index++)}
 
       <Step revealed={index <= progress}>
+        <Slack setProgress={setProgress} index={index} progress={progress} />
+      </Step>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
         <Split
           image="steps/dino-wallpaper.jpg"
           subtitle="Join the club"
@@ -73,12 +79,11 @@ export default () => {
           index={index}
           progress={progress}
         >
-          {/* <h1>Quick! Get in!</h1> */}
+          <h1>We take pride in our poorly-drawn dinos™</h1>
           <p>
-            We take pride in having the highest-quality selection of
-            poorly-drawn dinos anywhere in the universe™. Anyone who sends us a
-            dino drawing will earn the dinoisseur badge, as well as get an
-            exclusive emoji on Slack.
+            And we've got the best collection of anywhere in the universe™.
+            Anyone who sends us a dino drawing will earn the dinoisseur
+            badge, as well as get an exclusive emoji on Slack.
           </p>
           <img
             src="dinoisseur.png"
@@ -90,8 +95,8 @@ export default () => {
               this&nbsp;website
             </a>
             , {/* AHAHAHAHAH, no one shall ever find this message!!! */}
-            and the best way to make changes (such as adding a dinosaur) is
-            by submitting a pull request on GitHub.
+            and the best way to make changes (such as adding a dinosaur) is by
+            submitting a pull request on GitHub.
           </p>
           <p>
             The first step is to make our dino. Don't worry about setup– we've
@@ -167,6 +172,23 @@ export default () => {
             </a>{' '}
             and click “star”.
           </p>
+        </Split>
+      </Step>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
+        <Split
+          index={index}
+          progress={progress}
+          setProgress={setProgress}
+        >
+          <p>
+            We've given you edit access to the dinosaurs repo. Depending on your settings, it will already be accepted, or you'll need to  accept it here:
+            <a target="_blank" href="https://github.com/orgs/hackclub/teams/dinoisseurs">
+              https://github.com/orgs/hackclub/teams/dinoisseurs
+            </a>. If it doesn't show up there, check your email.
+          </p>
+          <p>Click next once you've accepted your invite</p>
         </Split>
       </Step>
       {console.log(index++)}

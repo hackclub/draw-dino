@@ -35,6 +35,7 @@ analytics.page();
       @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
       @import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
       @import url('https://fonts.googleapis.com/css?family=Yesteryear&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
       ${fontImport('Phantom Sans', '400', 'PhantomSans0.6-Regular')}
       ${fontImport('Phantom Sans', '500', 'PhantomSans0.6-Book')}
       ${fontImport('Phantom Sans', '600', 'PhantomSans0.6-Medium')}
@@ -42,6 +43,9 @@ analytics.page();
       ${fontImport('Phantom Sans', '800', 'PhantomSans0.6-Bold')}
       ${fontImport('Phantom Sans', null, 'PhantomSans0.6-Italic')}
 
+      html {
+        background: black;
+      }
       body {
         margin: 0;
         // font-family: 'Phantom Sans', 'Roboto', sans-serif;
