@@ -69,6 +69,7 @@ export default ({
       }
 
       .right {
+        text-align: left;
         max-height: 100%;
         padding: 3em;
         background: #eee;
