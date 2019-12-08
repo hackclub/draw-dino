@@ -164,6 +164,26 @@ export default () => {
       </Step>
       {console.log(index++)}
 */}
+
+      <Step revealed={index <= progress}>
+        <Split index={index} progress={progress} setProgress={setProgress}>
+          <p>
+            Now you'll need permission to edit the dinos repo. We've just sent
+            you an invite, and depending on your settings, it will be
+            auto-accepted or you'll need to accept it here:{' '}
+            <a
+              target="_blank"
+              href="https://github.com/orgs/hackclub/teams/dinoisseurs"
+            >
+              https://github.com/orgs/hackclub/teams/dinoisseurs
+            </a>
+            . If it doesn't show up there, check your email.
+          </p>
+          <p>Click next once you've accepted your invite</p>
+        </Split>
+      </Step>
+      {console.log(index++)}
+
       <Step revealed={index <= progress}>
         <Split
           image="steps/star.gif"
@@ -180,25 +200,6 @@ export default () => {
             </a>{' '}
             and click “star”.
           </p>
-        </Split>
-      </Step>
-      {console.log(index++)}
-
-      <Step revealed={index <= progress}>
-        <Split index={index} progress={progress} setProgress={setProgress}>
-          <p>
-            We've given you edit access to the dinosaurs repo. Depending on your
-            settings, it will already be accepted, or you'll need to accept it
-            here:
-            <a
-              target="_blank"
-              href="https://github.com/orgs/hackclub/teams/dinoisseurs"
-            >
-              https://github.com/orgs/hackclub/teams/dinoisseurs
-            </a>
-            . If it doesn't show up there, check your email.
-          </p>
-          <p>Click next once you've accepted your invite</p>
         </Split>
       </Step>
       {console.log(index++)}
