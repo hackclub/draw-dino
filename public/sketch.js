@@ -78,11 +78,11 @@ document.querySelector('#saveButton').addEventListener('click', e => {
     const [key, value] = kvString.split('=')
     urlParams[key] = value
   })
-  const username = urlParams['username']
+  const filePrefix = urlParams['filePrefix']
 
   if (filename) {
     canvas.toBlob(blob => {
-      let safeFileName = `${username}-${filename}`.replace(/[\s\.]/g, '-')
+      let safeFileName = `${filePrefix}-${filename}`.replace(/[\s\.]/g, '-')
 
       saveAs(blob, safeFileName + '.png')
       unsavedChanges = false

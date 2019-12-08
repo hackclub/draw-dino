@@ -31,7 +31,7 @@ const subtitleStyle = {
 export default () => {
   const [dinoName, setDinoName] = useState('')
   const [progress, setProgress] = useState(0)
-  const [github, setGithub] = useState('')
+  const [github, setGithub] = useState(Date.now().toString(36)) // we're putting some random value here in case we can't later figure out what the user's github username is
   const [inviteStatus, setInviteStatus] = useState('')
 
   useEffect(() => {
@@ -44,12 +44,16 @@ export default () => {
         result[key] = value
       })
 
-    setGithub(result.username)
-    setInviteStatus(result.inviteStatus)
+    const { username, inviteStatus } = result
+    if (username) {
+      setGithub(username)
+    }
+    if (inviteStatus) {
+      setInviteStatus(inviteStatus)
+    }
   })
 
-  const getName = () =>
-    github + dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
+  const getName = () => dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
 
   const easterEggs = [
@@ -127,7 +131,7 @@ export default () => {
           index={index}
           progress={progress}
           setProgress={setProgress}
-          username={github}
+          filePrefix={github}
         />
       </Step>
       {console.log(index++)}

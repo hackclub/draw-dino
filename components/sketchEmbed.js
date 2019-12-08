@@ -24,7 +24,7 @@ const progressStyle = {
   width: '10em',
 }
 
-export default ({ setDinoName, progress, index, setProgress, username }) => {
+export default ({ setDinoName, progress, index, setProgress, filePrefix }) => {
   useEffect(() => {
     window.addEventListener(
       'message',
@@ -45,7 +45,7 @@ export default ({ setDinoName, progress, index, setProgress, username }) => {
 
   return (
     <div style={containerStyle}>
-      <iframe src={`sketch.html?username=${username}`} style={iframeStyle} />
+      <iframe src={`sketch.html?filePrefix=${filePrefix}`} style={iframeStyle} />
       <ProgressButton
         setProgress={setProgress}
         index={index}
