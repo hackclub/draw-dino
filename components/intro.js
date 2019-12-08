@@ -126,6 +126,23 @@ export default ({ index, progress, setProgress }) => (
       .vertical-float:hover {
         animation-play-state: paused !important;
       }
+
+      .title {
+        font-family: 'Yesteryear', cursive;
+        font-size: 4em;
+        line-height: 1em;
+        font-style: italic;
+        margin-top: 0;
+        margin-bottom: 0;
+        text-shadow: 1px 1px 3px #ddd, 2px 2px 9px #555, 3px 3px 2px #999,
+          4px 4px 4px #999, 6px 6px 6px #999, 6px 6px 6px #999,
+          0.2em 0.2em 0.25em black;
+      }
+      @media (min-width: 992px) {
+        .title {
+          font-size: 8em;
+        }
+      }
     `}</style>
     <div style={containerStyle}>
       <div style={bannerStyle} className="blur-in">
@@ -163,7 +180,7 @@ export default ({ index, progress, setProgress }) => (
           />
           <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
           <p>Orpheus the Dinosaur stars in...</p>
-          <h1 style={titleStyle}>
+          <h1 className="title">
             “Draw a<br />
             Dino”
           </h1>
