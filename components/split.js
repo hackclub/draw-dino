@@ -1,25 +1,5 @@
 import ProgressButton from './progressButton'
 
-const sideStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  color: 'white',
-  background: '#333',
-  position: 'relative',
-  maxHeight: '100%',
-}
-
-const rightStyle = {
-  padding: '3em',
-  background: '#eee',
-  background: 'linear-gradient(#eee, #eaeaea)',
-  color: '#222',
-  overflowY: 'auto',
-}
-
 const subStyle = {
   fontStyle: 'italic',
   opacity: 0.7,
@@ -27,6 +7,7 @@ const subStyle = {
 
 const imageStyle = {
   maxWidth: '90%',
+  maxHeight: '90%',
   borderRadius: '0.5em',
   boxShadow: 'rgba(0, 0, 0, 1) 0 0 1em, rgba(255, 255, 255, 0.1) 0 0 5em',
 }
@@ -65,9 +46,39 @@ export default ({
           grid-template-columns: 50% 50%;
         }
       }
+
+      .side {
+        text-align: center;
+        color: white;
+        background: #333;
+        position: relative;
+        min-height: 50vh;
+        max-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-y: hidden;
+        box-sizing: border-box;
+      }
+      @media (min-width: 992px) {
+        .side {
+          max-height: 100%;
+          overflow-y: auto;
+        }
+      }
+
+      .right {
+        max-height: 100%;
+        padding: 3em;
+        background: #eee;
+        background: linear-gradient(#eee, #eaeaea);
+        color: #222;
+        overflow-y: auto;
+      }
     `}</style>
     <div className="container">
-      <div style={sideStyle}>
+      <div className="side">
         {image && (
           <>
             <a target="_blank" href={imageLink}>
@@ -77,7 +88,7 @@ export default ({
           </>
         )}
       </div>
-      <div style={{ ...sideStyle, ...rightStyle }}>
+      <div className="side right">
         {children}
         <ProgressButton
           setProgress={setProgress}
