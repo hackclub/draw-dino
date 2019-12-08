@@ -161,14 +161,22 @@ export default ({ index, progress, setProgress }) => (
               transform: 'rotate(270deg)',
             }}
           />
-          <p style={{fontFamily: "'Dancing Script', cursive", fontSize: '4em'}}>Cont’d</p>
+          <p
+            style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4em' }}
+          >
+            Opt'nl
+          </p>
           <p style={{ fontSize: '2em' }}>
             Orpheus says: <br />
             “Sign in to Slack for an exclusive emoji!”
           </p>
-          <a href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=2210535565.713809622784">
-            <img src="slack.svg" />
+          <a
+            href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=2210535565.713809622784"
+            target="_blank"
+            style={{ display: 'block', textDecoration: 'none' }}
+          >
             <p>Click here to sign into Slack</p>
+            <img src="slack.svg" />
           </a>
           <ProgressButton
             index={index}
