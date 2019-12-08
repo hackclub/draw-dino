@@ -89,9 +89,9 @@ export default () => {
         >
           <h1>We take pride in our poorly-drawn dinos™</h1>
           <p>
-            And we've got the best collection of anywhere in the universe™.
-            Anyone who sends us a dino drawing will earn the dinoisseur badge,
-            as well as get an exclusive emoji on Slack.
+            And we've got the best collection anywhere in the universe™. Anyone
+            who sends us a dino drawing will earn the dinoisseur badge, as well
+            as get an exclusive emoji on Slack.
           </p>
           <img
             src="dinoisseur.png"
