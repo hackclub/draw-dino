@@ -4,7 +4,7 @@ const containerStyle = {
   width: '100%',
   height: '100vh',
   minHeight: '30em',
-  overflow: 'hidden',
+  overflow: 'auto',
   margin: 0,
   background: 'black',
   fontFamily: "'Bellefair', serif",
