@@ -201,7 +201,7 @@ export default ({ index, progress, setProgress }) => (
             </div>
           </ProgressButton>
           <div style={footerStyle}>
-            <p>© COPYWRONG THE HACK FOUNDATION</p>
+            <p>© COPYTHIS FROM THE HACK FOUNDATION</p>
             <p>ALL RIGHTS RESERVED</p>
           </div>
         </div>
