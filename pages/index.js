@@ -47,6 +47,8 @@ export default () => {
     const { username, inviteStatus } = result
     if (username) {
       setGithub(username)
+    } else {
+      window.location.replace('https://hack.af/make-dino')
     }
     if (inviteStatus) {
       setInviteStatus(inviteStatus)
