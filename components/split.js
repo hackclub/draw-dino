@@ -87,8 +87,8 @@ export default ({
         left: 0;
         right: 0;
         bottom: 0;
-        background: url("grain.jpg") repeat center center;
-        opacity: .11;
+        background: url('grain.jpg') repeat center center;
+        opacity: 0.11;
       }
     `}</style>
     <div className="container">

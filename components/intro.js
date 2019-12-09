@@ -14,36 +14,8 @@ const containerStyle = {
   justifyContent: 'center',
 }
 
-const bannerStyle = {
-  background: '#222',
-  boxShadow: '0 0 15vh 15vh #222',
-  textAlign: 'center',
-  color: 'white',
-  margin: '0 auto',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  padding: '1em',
-}
-
 const supertitleStyle = {
   fontFamily: "'Bellefair', serif",
-}
-
-const titleStyle = {
-  fontFamily: "'Yesteryear', cursive",
-  fontSize: '8em',
-  fontStyle: 'italic',
-  marginTop: 0,
-  marginBottom: 0,
-  textShadow: `
-1px 1px 3px #ddd,
-2px 2px 9px #555,
-3px 3px 2px #999,
-4px 4px 4px #999,
-6px 6px 6px #999,
-6px 6px 6px #999,
-0.2em 0.2em 0.25em black`,
 }
 
 const subtitleStyle = {
@@ -143,67 +115,77 @@ export default ({ index, progress, setProgress }) => (
           font-size: 8em;
         }
       }
+
+      .banner {
+        background: #222;
+        box-shadow: 0 0 15vh 15vh #222;
+        text-align: center;
+        color: white;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        padding: 1em;
+      }
     `}</style>
     <div style={containerStyle}>
-      <div style={bannerStyle} className="blur-in">
-        <div className="">
-          <img
-            src="decorative-corner.png"
-            style={{ position: 'absolute', top: 0, left: 0 }}
-          />
-          <img
-            src="decorative-corner.png"
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              transform: 'rotate(90deg)',
-            }}
-          />
-          <img
-            src="decorative-corner.png"
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              right: 0,
-              transform: 'rotate(180deg)',
-            }}
-          />
-          <img
-            src="decorative-corner.png"
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              transform: 'rotate(270deg)',
-            }}
-          />
-          <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
-          <p>Orpheus the Dinosaur stars in...</p>
-          <h1 className="title">
-            “Draw a<br />
-            Dino”
-          </h1>
-          <p style={subtitleStyle}>
-            Or, An “Inter-Active” Primer to Submit Pull Requests
-          </p>
-          <ProgressButton
-            index={index}
-            progress={progress}
-            setProgress={setProgress}
-          >
-            <div className="vertical-float">
-              <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
-              <img
-                src="decorative-bottom.png"
-                style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
-              />
-            </div>
-          </ProgressButton>
-          <div style={footerStyle}>
-            <p>© COPYTHIS FROM THE HACK FOUNDATION</p>
-            <p>ALL RIGHTS RESERVED</p>
+      <div className="blur-in banner">
+        <img
+          src="decorative-corner.png"
+          style={{ position: 'absolute', top: 0, left: 0 }}
+        />
+        <img
+          src="decorative-corner.png"
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            transform: 'rotate(90deg)',
+          }}
+        />
+        <img
+          src="decorative-corner.png"
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            transform: 'rotate(180deg)',
+          }}
+        />
+        <img
+          src="decorative-corner.png"
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            transform: 'rotate(270deg)',
+          }}
+        />
+        <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
+        <p>Orpheus the Dinosaur stars in...</p>
+        <h1 className="title">
+          “Draw a<br />
+          Dino”
+        </h1>
+        <p style={subtitleStyle}>
+          Or, An “Inter-Active” Primer to Submit Pull Requests
+        </p>
+        <ProgressButton
+          index={index}
+          progress={progress}
+          setProgress={setProgress}
+        >
+          <div className="vertical-float">
+            <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
+            <img
+              src="decorative-bottom.png"
+              style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
+            />
           </div>
+        </ProgressButton>
+        <div style={footerStyle}>
+          <p>© COPYTHIS FROM THE HACK FOUNDATION</p>
+          <p>ALL RIGHTS RESERVED</p>
         </div>
       </div>
     </div>
