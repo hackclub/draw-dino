@@ -77,6 +77,19 @@ export default ({
         color: #222;
         overflow-y: auto;
       }
+
+      .right:after {
+        // totally taken from https://codepen.io/bullerb/pen/BzKzvK?editors=0100
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("grain.jpg") repeat center center;
+        opacity: .11;
+      }
     `}</style>
     <div className="container">
       <div className="side">
