@@ -167,24 +167,28 @@ export default () => {
       {console.log(index++)}
 */}
 
-      <Step revealed={index <= progress}>
-        <Split index={index} progress={progress} setProgress={setProgress}>
-          <p>
-            Now you'll need permission to edit the dinos repo. We've just sent
-            you an invite, and depending on your settings, it will be
-            auto-accepted or you'll need to{' '}
-            <a
-              target="_blank"
-              href="https://github.com/orgs/hackclub/teams/dinoisseurs"
-            >
-              accept it here
-            </a>
-            . If it doesn't show up there, check your email.
-          </p>
-          <p>Click next once you've accepted your invite</p>
-        </Split>
-      </Step>
-      {console.log(index++)}
+      {inviteStatus !== 'active' && (
+        <>
+          <Step revealed={index <= progress}>
+            <Split index={index} progress={progress} setProgress={setProgress}>
+              <p>
+                Now you'll need permission to edit the dinos repo. We've just
+                sent you an invite, and depending on your settings, it will be
+                auto-accepted or you'll need to{' '}
+                <a
+                  target="_blank"
+                  href="https://github.com/orgs/hackclub/teams/dinoisseurs"
+                >
+                  accept it here
+                </a>
+                . If it doesn't show up there, check your email.
+              </p>
+              <p>Go to the next step once you've accepted your invite.</p>
+            </Split>
+          </Step>
+          {console.log(index++)}
+        </>
+      )}
 
       <Step revealed={index <= progress}>
         <Split
