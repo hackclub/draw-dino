@@ -170,12 +170,12 @@ export default () => {
           <p>
             Now you'll need permission to edit the dinos repo. We've just sent
             you an invite, and depending on your settings, it will be
-            auto-accepted or you'll need to
+            auto-accepted or you'll need to{' '}
             <a
               target="_blank"
               href="https://github.com/orgs/hackclub/teams/dinoisseurs"
             >
-              accept it here{' '}
+              accept it here
             </a>
             . If it doesn't show up there, check your email.
           </p>
