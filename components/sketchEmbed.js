@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import Scroll from 'react-scroll'
 
-import ProgressButton from './progressButton'
-
 const containerStyle = {
   height: '100vh',
   position: 'relative',
@@ -15,13 +13,15 @@ const iframeStyle = {
   border: 'none',
 }
 
-const progressStyle = {
+const continueMessage = {
+  color: 'white',
+  textAlign: 'center',
+  textShadow: '0px 0px 8px black',
   position: 'absolute',
   marginBottom: '10%',
   marginRight: '10%',
   bottom: 0,
   right: 0,
-  width: '10em',
 }
 
 export default ({ setDinoName, progress, index, setProgress, filePrefix }) => {
@@ -45,18 +45,13 @@ export default ({ setDinoName, progress, index, setProgress, filePrefix }) => {
 
   return (
     <div style={containerStyle}>
-      <iframe src={`sketch.html?filePrefix=${filePrefix}`} style={iframeStyle} />
-      <ProgressButton
-        setProgress={setProgress}
-        index={index}
-        progress={progress}
-        style={progressStyle}
-      >
-        <img
-          src={index == progress ? 'next-white.png' : 'back-white.png'}
-          style={{ width: '100%' }}
-        />
-      </ProgressButton>
+      <p style={continueMessage}>
+        Finish and save your dino drawing to continue
+      </p>
+      <iframe
+        src={`sketch.html?filePrefix=${filePrefix}`}
+        style={iframeStyle}
+      />
     </div>
   )
 }
