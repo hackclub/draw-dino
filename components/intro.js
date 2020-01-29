@@ -24,7 +24,6 @@ const subtitleStyle = {
 
 const footerStyle = {
   fontSize: '0.5em',
-  fontWeight: 'bold',
   textShadow: `
 1px 1px 1px #ddd,
 2px 2px 1px #ccc,
@@ -71,8 +70,8 @@ export default ({ index, progress, setProgress }) => (
 
       p,
       h1 {
-        text-shadow: 0 0 0.2rem #eee;
-        color: transparent;
+        text-shadow: 0 0 0.1rem #eee;
+        color: white;
       }
 
       button {

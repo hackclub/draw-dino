@@ -44,7 +44,6 @@ const titleStyle = {
 
 const footerStyle = {
   fontSize: '0.5em',
-  fontWeight: 'bold',
   textShadow: `
 0px 0px 2px #ddd,
 1px 1px 2px #ccc,
@@ -65,8 +64,8 @@ export default () => (
 
       p,
       h1 {
-        text-shadow: 0 0 0.2rem #eee;
-        color: transparent;
+        text-shadow: 0 0 0.1rem #eee;
+        color: white;
       }
 
       a {
