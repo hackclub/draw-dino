@@ -73,6 +73,16 @@ analytics.page();
         color: inherit;
       }
 
+      ::-moz-selection {
+        color: black;
+        background: #ddd;
+        text-shadow: none;
+      }
+      ::selection {
+        color: black;
+        background: #ddd;
+        text-shadow: none;
+      }
 
     `}</style>
   </>
