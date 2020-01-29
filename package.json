@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/maxwofford/excitedcornsilkpackages"
+    "url": "https://github.com/hackclub/make-dino"
   },
   "scripts": {
     "dev": "next dev",
