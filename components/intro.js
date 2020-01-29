@@ -1,4 +1,5 @@
 import ProgressButton from './progressButton'
+import packageJson from '../package.json'
 
 const containerStyle = {
   width: '100%',
@@ -183,7 +184,7 @@ export default ({ index, progress, setProgress }) => (
           </div>
         </ProgressButton>
         <div style={footerStyle}>
-          <p>© COPYTHIS FROM THE HACK FOUNDATION</p>
+          <p>© <a href={packageJson.repository.url}>COPYTHIS FROM THE HACK FOUNDATION</a></p>
           <p>ALL RIGHTS RESERVED</p>
         </div>
       </div>

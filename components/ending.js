@@ -1,3 +1,5 @@
+import packageJson from '../package.json'
+
 const containerStyle = {
   width: '100%',
   height: '100vh',
@@ -130,7 +132,7 @@ export default () => (
           style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
         />
         <div style={footerStyle}>
-          <p>© COPYWRONG THE HACK FOUNDATION</p>
+          <p>© <a href={packageJson.repository.url}>COPYTHIS FROM THE HACK FOUNDATION</a></p>
           <p>ALL RIGHTS RESERVED</p>
         </div>
       </div>
