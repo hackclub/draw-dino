@@ -58,7 +58,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress }) => (
+export default ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`
       @keyframes blur-in {
@@ -170,7 +170,7 @@ export default ({ index, progress, setProgress }) => (
             “Sign in to Slack for an exclusive emoji!”
           </p>
           <a
-            href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=2210535565.713809622784"
+            href={"https://hack.af/make-dino-slack-auth?state=https://github.com/" + github}
             target="_blank"
             style={{ display: 'block', textDecoration: 'none' }}
           >

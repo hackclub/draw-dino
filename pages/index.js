@@ -75,10 +75,10 @@ export default () => {
       </Step>
       {console.log(index++)}
 
-      {/* <Step revealed={index <= progress}>
-        <Slack setProgress={setProgress} index={index} progress={progress} />
+      <Step revealed={index <= progress}>
+        <Slack setProgress={setProgress} index={index} progress={progress} github={github} />
       </Step>
-      {console.log(index++)} */}
+      {console.log(index++)}
 
       <Step revealed={index <= progress}>
         <Split
@@ -101,7 +101,10 @@ export default () => {
           />
           <p>
             Hack Club stores all it's code on GitHub, including{' '}
-            <a href="https://github.com/maxwofford/excitedcornsilkpackages/blob/d15ed38de59c2f918626f3daae90bf96d4bb136e/pages/index.js#L101" target="_blank">
+            <a
+              href="https://github.com/maxwofford/excitedcornsilkpackages/blob/d15ed38de59c2f918626f3daae90bf96d4bb136e/pages/index.js#L101"
+              target="_blank"
+            >
               this&nbsp;website
             </a>
             , {/* AHAHAHAHAH, no one shall ever find this message!!! */}
