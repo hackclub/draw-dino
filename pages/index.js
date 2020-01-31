@@ -236,7 +236,7 @@ export default () => {
           setProgress={setProgress}
         >
           <p>Scroll through the list of files & find “README.md”</p>
-          <p>To edit the file, click it & click the ✎ icon.</p>
+          <p>To edit the file, click it & click the <img src="github-edit.svg"/> icon.</p>
         </Split>
       </Step>
       {console.log(index++)}
