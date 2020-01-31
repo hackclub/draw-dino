@@ -26,30 +26,6 @@ const bannerStyle = {
   padding: '1em',
 }
 
-const supertitleStyle = {
-  fontFamily: "'Bellefair', serif",
-}
-
-const titleStyle = {
-  fontFamily: "'Yesteryear', cursive",
-  fontSize: '8em',
-  fontStyle: 'italic',
-  marginTop: 0,
-  marginBottom: 0,
-  textShadow: `
-1px 1px 3px #ddd,
-2px 2px 9px #555,
-3px 3px 2px #999,
-4px 4px 4px #999,
-6px 6px 6px #999,
-6px 6px 6px #999,
-0.2em 0.2em 0.25em black`,
-}
-
-const subtitleStyle = {
-  fontSize: '2em',
-}
-
 const footerStyle = {
   fontSize: '0.5em',
   textShadow: `

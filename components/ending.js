@@ -119,14 +119,6 @@ export default () => (
           Orpheus says: <br />
           “That's all for now folks!”
         </p>
-        {/* <p style={{ fontSize: '2em' }}>
-          Orpheus says: <br />
-          “Sign in to Slack for an exclusive emoji!”
-        </p> */}
-        {/* <a href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=2210535565.713809622784">
-          <img src="slack.svg" />
-          <p>Sign in with Slack</p>
-        </a> */}
         <img
           src="decorative-bottom.png"
           style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}

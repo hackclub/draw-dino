@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import AutosizeInput from 'react-input-autosize'
 
 import Step from '../components/step'
 import Meta from '../components/meta'
@@ -140,35 +139,6 @@ export default () => {
         />
       </Step>
       {console.log(index++)}
-
-      {/* <Step revealed={index <= progress}>
-        <Split
-          image="steps/drawing-dino.gif"
-          imageLink="steps/drawing-dino.gif"
-          subtitle={getFilename()}
-          setProgress={setProgress}
-          index={index}
-          progress={progress}
-        >
-          <p>
-            Draw your dino by sketching it{' '}
-            <a target="_blank" href="/sketch.html">
-              here
-            </a>{' '}
-            (or use your own drawing tools). Once you've got one, type the name
-            of the dino here:
-          </p>
-          <AutosizeInput
-            type="text"
-            value={dinoName}
-            onChange={e => setDinoName(e.target.value)}
-            placeholder="drawing-dino"
-            inputStyle={styleInput}
-          />
-        </Split>
-      </Step>
-      {console.log(index++)}
-*/}
 
       {inviteStatus !== 'active' && (
         <>
