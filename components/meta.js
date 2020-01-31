@@ -28,6 +28,8 @@ analytics.page();
       `,
         }}
       />
+      <link rel="shortcut icon" type="image/x-icon" href="dinoisseur.png" />
+      <title>Draw Dino</title>
     </Head>
     <style jsx global>{`
 
