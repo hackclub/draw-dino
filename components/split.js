@@ -96,7 +96,8 @@ export default ({
         {image && (
           <>
             <a target="_blank" href={imageLink}>
-              <img src={image} style={imageStyle} />
+              {/* <img src={image} style={imageStyle} /> */}
+              <p>{image}</p>
             </a>
             <p style={subStyle}>{subtitle || image}</p>
           </>
