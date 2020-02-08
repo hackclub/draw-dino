@@ -74,10 +74,10 @@ export default () => {
       </Step>
       {console.log(index++)}
 
-      <Step revealed={index <= progress}>
+      {/* <Step revealed={index <= progress}>
         <Slack setProgress={setProgress} index={index} progress={progress} github={github} />
       </Step>
-      {console.log(index++)}
+      {console.log(index++)} */}
 
       <Step revealed={index <= progress}>
         <Split
