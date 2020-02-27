@@ -99,9 +99,9 @@ export default () => {
             style={{ borderRadius: '10%', height: '3em' }}
           />
           <p>
-            Hack Club stores all it's code on GitHub, including{' '}
+            Hack Club stores all its code on GitHub, including{' '}
             <a
-              href="https://github.com/maxwofford/excitedcornsilkpackages/blob/d15ed38de59c2f918626f3daae90bf96d4bb136e/pages/index.js#L101"
+              href="https://github.com/hackclub/draw-dino/blob/06f7dabd5c125ae54a18c1b2badfbe7665d019a5/pages/index.js#L102"
               target="_blank"
             >
               this&nbsp;website
@@ -111,7 +111,7 @@ export default () => {
             submitting a pull request on GitHub.
           </p>
           <p>
-            The first step is to make our dino. Don't worry about setup– we've
+            The first step is to make our dino. Don't worry about setup—we've
             included a full dino-drawing-a-tron below for you to use. Just click
             "next" and make that dino! You're also free to use a photo.
           </p>
