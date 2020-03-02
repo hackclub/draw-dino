@@ -31,7 +31,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress }) => (
+export default ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`
       @keyframes blur-in {
@@ -162,7 +162,7 @@ export default ({ index, progress, setProgress }) => (
           }}
         />
         <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
-        <p>Orpheus the Dinosaur stars in...</p>
+        <p>Orpheus the Dinosaur and {github} co-star in...</p>
         <h1 className="title">
           “Draw a<br />
           Dino”

@@ -70,7 +70,7 @@ export default () => {
     <>
       <Meta />
       <Step revealed={index <= progress}>
-        <Intro setProgress={setProgress} index={index} progress={progress} />
+        <Intro setProgress={setProgress} index={index} progress={progress} github={github} />
       </Step>
       {console.log(index++)}
 
