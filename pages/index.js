@@ -150,7 +150,7 @@ export default () => {
                 auto-accepted or you'll need to{' '}
                 <a
                   target="_blank"
-                  href="https://github.com/orgs/hackclub/teams/dinoisseurs"
+                  href="https://github.com/orgs/hackclub/invitation"
                 >
                   accept it here
                 </a>
