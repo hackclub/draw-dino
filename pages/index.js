@@ -228,7 +228,7 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Scroll through the list of files & find “README.md”. (The list is long, so you can go to it directly <a href="https://github.com/hackclub/dinosaurs/blob/master/README.md" target="_blank">here)</a></p>
+          <p>Scroll through the list of files & find “README.md”.</p>
           <p>
             To edit the file, click it & click the <img src="github-edit.svg" />{' '}
             icon.
