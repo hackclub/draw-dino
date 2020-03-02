@@ -82,7 +82,7 @@ document.querySelector('#saveButton').addEventListener('click', e => {
 
   if (filename) {
     canvas.toBlob(blob => {
-      let safeFileName = `${filePrefix}-${filename}`.replace(/[\s\.]/g, '-')
+      let safeFileName = `${filePrefix}-${filename}`.replace(/[^\w+]/g, '_')
 
       saveAs(blob, safeFileName + '.png')
       unsavedChanges = false

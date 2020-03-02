@@ -54,7 +54,7 @@ export default () => {
     }
   })
 
-  const getName = () => dinoName.replace(/[\s\.]/g, '-') || 'YOUR-DINO-NAME'
+  const getName = () => dinoName.replace(/[^\w+]/g, '_') || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
 
   const easterEggs = [
