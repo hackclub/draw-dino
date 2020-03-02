@@ -215,6 +215,7 @@ export default () => {
             Then click{' '}
             <span style={{ color: 'rgb(52, 208, 88)' }}>COMMIT CHANGES</span>
           </p>
+          <p>Warning: <span style={{ color: 'rgb(208, 52, 88)' }}>Do not</span> click the green button that says "Create pull request" just yet– we'll get there in a couple more steps.</p>
         </Split>
       </Step>
       {console.log(index++)}
