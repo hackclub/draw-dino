@@ -29,6 +29,8 @@ export default () => {
   const [github, setGithub] = useState(Date.now().toString(36)) // we're putting some random value here in case we can't later figure out what the user's github username is
   const [inviteStatus, setInviteStatus] = useState('')
 
+  const slack = true
+
   useEffect(() => {
     const result = {}
     window.location.search
@@ -70,10 +72,14 @@ export default () => {
       </Step>
       {console.log(index++)}
 
-      {/* <Step revealed={index <= progress}>
-        <Slack setProgress={setProgress} index={index} progress={progress} github={github} />
-      </Step>
-      {console.log(index++)} */}
+      {slack && (
+        <>
+        <Step revealed={index <= progress}>
+          <Slack setProgress={setProgress} index={index} progress={progress} github={github} />
+        </Step>
+        {console.log(index++)}
+        </>
+      )}
 
       <Step revealed={index <= progress}>
         <Split

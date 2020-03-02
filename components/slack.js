@@ -72,6 +72,10 @@ export default ({ index, progress, setProgress, github }) => (
         filter: blur(1px);
       }
 
+      .slack-logo, .portrait, .portrait-decoration {
+        filter: blur(0px);
+      }
+
       p,
       h1 {
         text-shadow: 0 0 0.1rem #eee;
@@ -139,19 +143,38 @@ export default ({ index, progress, setProgress, github }) => (
           <p
             style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4em' }}
           >
-            Opt'nl
+            Optional
           </p>
-          <p style={{ fontSize: '2em' }}>
+          <p>
             Orpheus says: <br />
-            “Sign in to Slack for an exclusive emoji!”
+            “If you're a Hack Clubber, sign in to Slack for an exclusive emoji!”
           </p>
+
           <a
-            href={"https://hack.af/make-dino-slack-auth?state=https://github.com/" + github}
+            href={
+              'https://hack.af/make-dino-slack-auth?state=https://github.com/' +
+              github
+            }
             target="_blank"
             style={{ display: 'block', textDecoration: 'none' }}
           >
-            <p>Click here to sign into Slack</p>
-            <img src="slack.svg" />
+          <img
+            className="portrait-decoration"
+            src="portrait-decoration.svg"
+            style={{height: '4em', paddingBottom: '0.5em', paddingLeft: '3px', transform: 'scaleX(-1)'}} />
+          <img
+            className="portrait"
+            src="dinoisseur.png"
+            style={{ borderRadius: '10%', height: '5em' }}
+          />
+          <img
+            className="portrait-decoration"
+            src="portrait-decoration.svg"
+            style={{height: '4em', paddingBottom: '0.5em', paddingLeft: '3px'}} />
+          <p style={{opacity: 0.5, marginTop: 0}}>:smug-dino:</p>
+            <p>Click here to sign into{' '}
+            <img src="slack.svg" className="slack-logo" style={{height: '1em'}} /> Slack
+          </p>
           </a>
           <ProgressButton
             index={index}
