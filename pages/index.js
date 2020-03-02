@@ -7,10 +7,7 @@ import Slack from '../components/slack'
 import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
-
-const styleColored = {
-  fontWeight: 'bold',
-}
+import CopyChunk from '../components/copyChunk'
 
 const styleInput = {
   borderRadius: '10px',
@@ -18,7 +15,6 @@ const styleInput = {
 }
 
 const quoteStyle = {
-  ...styleColored,
   color: '#333',
 }
 
@@ -194,7 +190,7 @@ export default () => {
         >
           <p>Find and click the dropdown “Branch: master ▼”.</p>
           <p>
-            Type in <strong>{getName()}</strong>
+            Type in <CopyChunk>{getName()}</CopyChunk>
           </p>
           <p>Click “Create branch: {getName()}”</p>
         </Split>
@@ -212,15 +208,12 @@ export default () => {
         >
           <p>Click “Upload files” and add your dino image</p>
           <p>
-            Below “Commit changes”, type{' '}
-            <span style={quoteStyle}>“Add {getFilename()}”</span> in the first
-            text box
+            Below “Commit changes”, type this into the first text box:
+            <CopyChunk>Add {getFilename()}</CopyChunk>
           </p>
           <p>
             Then click{' '}
-            <span style={{ ...styleColored, color: 'rgb(52, 208, 88)' }}>
-              COMMIT CHANGES
-            </span>
+            <span style={{ color: 'rgb(52, 208, 88)' }}>COMMIT CHANGES</span>
           </p>
         </Split>
       </Step>
@@ -236,7 +229,10 @@ export default () => {
           setProgress={setProgress}
         >
           <p>Scroll through the list of files & find “README.md”</p>
-          <p>To edit the file, click it & click the <img src="github-edit.svg"/> icon.</p>
+          <p>
+            To edit the file, click it & click the <img src="github-edit.svg" />{' '}
+            icon.
+          </p>
         </Split>
       </Step>
       {console.log(index++)}
@@ -251,23 +247,20 @@ export default () => {
           setProgress={setProgress}
         >
           <p>Add the following lines to the bottom of the file:</p>
-          <pre>
-            <code>
-              "{getName()}"
-              <br />
-              <br />
-              ![]({getFilename()})
-            </code>
-          </pre>
+          <CopyChunk>
+            "{getName()}"
+            <br />
+            <br />
+            ![]({getFilename()})
+          </CopyChunk>
           <p>
             Below “Commit changes”, type{' '}
-            <strong>Add {getName()} to README</strong> in the first text box
+            <CopyChunk>Add {getName()} to README</CopyChunk> in the first text
+            box
           </p>
           <p>
             Then click{' '}
-            <span style={{ ...styleColored, color: 'rgb(52, 208, 88)' }}>
-              COMMIT CHANGES
-            </span>
+            <span style={{ color: 'rgb(52, 208, 88)' }}>COMMIT CHANGES</span>
           </p>
         </Split>
       </Step>
@@ -287,7 +280,7 @@ export default () => {
               https://github.com/hackclub/dinosaurs
             </a>{' '}
             and click{' '}
-            <span style={{ ...styleColored, color: 'rgb(52, 208, 88)' }}>
+            <span style={{ color: 'rgb(52, 208, 88)' }}>
               Compare & pull request
             </span>
             .
@@ -295,7 +288,7 @@ export default () => {
           <p>
             {' '}
             Then click{' '}
-            <span style={{ ...styleColored, color: 'rgb(52, 208, 88)' }}>
+            <span style={{ color: 'rgb(52, 208, 88)' }}>
               Create pull request
             </span>
           </p>
