@@ -34,7 +34,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress, github }) => (
+export default ({ index, progress, setProgress }) => (
   <>
     <style jsx>{`
       @keyframes blur-in {
