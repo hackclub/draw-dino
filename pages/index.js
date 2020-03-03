@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Step from '../components/step'
 import Meta from '../components/meta'
 import Intro from '../components/intro'
+import HackPack from '../components/hackPack'
 import Slack from '../components/slack'
 import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
@@ -68,7 +69,12 @@ export default () => {
     <>
       <Meta />
       <Step revealed={index <= progress}>
-        <Intro setProgress={setProgress} index={index} progress={progress} github={github} />
+        <Intro
+          setProgress={setProgress}
+          index={index}
+          progress={progress}
+          github={github}
+        />
       </Step>
       {console.log(index++)}
 
@@ -300,6 +306,15 @@ export default () => {
             </span>
           </p>
         </Split>
+      </Step>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
+        <HackPack
+          setProgress={setProgress}
+          index={index}
+          progress={progress}
+        />
       </Step>
       {console.log(index++)}
 
