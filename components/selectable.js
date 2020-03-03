@@ -18,7 +18,7 @@ export default ({ children }) => {
           font-size: 1rem;
         }
 
-        pre::selection {
+        pre:selection {
           color: white;
           background: rgb(56, 117, 171);
         }

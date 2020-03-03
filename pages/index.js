@@ -7,7 +7,7 @@ import Slack from '../components/slack'
 import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
-import CopyChunk from '../components/copyChunk'
+import Selectable from '../components/selectable'
 
 const styleInput = {
   borderRadius: '10px',
@@ -196,7 +196,7 @@ export default () => {
         >
           <p>Find and click the dropdown “Branch: master ▼”.</p>
           <p>
-            Type in <CopyChunk>{getName()}</CopyChunk>
+            Type in <Selectable>{getName()}</Selectable>
           </p>
           <p>Click “Create branch: {getName()}”</p>
         </Split>
@@ -215,7 +215,7 @@ export default () => {
           <p>Click “Upload files” and add your dino image</p>
           <p>
             Below “Commit changes”, type this into the first text box:
-            <CopyChunk>Add {getFilename()}</CopyChunk>
+            <Selectable>Add {getFilename()}</Selectable>
           </p>
           <p>
             Then click{' '}
@@ -254,15 +254,15 @@ export default () => {
           setProgress={setProgress}
         >
           <p>Add the following lines to the bottom of the file:</p>
-          <CopyChunk>
+          <Selectable>
             "{getName()}"
             <br />
             <br />
             ![]({getFilename()})
-          </CopyChunk>
+          </Selectable>
           <p>
             Below “Commit changes”, type{' '}
-            <CopyChunk>Add {getName()} to README</CopyChunk> in the first text
+            <Selectable>Add {getName()} to README</Selectable> in the first text
             box
           </p>
           <p>
