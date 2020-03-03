@@ -61,6 +61,7 @@ export default () => {
     'https://youtu.be/Cw_f4OgW0vQ',
     'https://youtu.be/SXDcpkbkItw',
     'https://youtu.be/51reoULiSjI',
+    'https://youtu.be/Z9AJlTnNf_0',
   ]
   const eggLink = easterEggs[Math.floor(easterEggs.length * Math.random())]
 
