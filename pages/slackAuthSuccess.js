@@ -7,7 +7,12 @@ export default () => {
   return (
     <>
       <Meta />
-      <p>Success! Go ahead and close this window</p>
+      <p style={{ color: 'white' }}>
+        Success! Once you submit your pull request you'll automatically have access to the badge on Slack.
+      </p>
+      <p style={{ color: 'white' }}>
+        Now close this window and return to the workshop...
+      </p>
     </>
   )
 }
