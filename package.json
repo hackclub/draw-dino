@@ -1,10 +1,10 @@
 {
-  "name": "excitedcornsilkpackages",
+  "name": "draw-dino",
   "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/hackclub/make-dino"
+    "url": "https://github.com/hackclub/draw-dino"
   },
   "scripts": {
     "dev": "next dev",
