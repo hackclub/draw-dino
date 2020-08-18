@@ -1,4 +1,4 @@
-![](screenshot.png)
+![Screenshot of site](screenshot.png)
 
 # Make a Dino
 
@@ -6,8 +6,8 @@ Hack Club's workshop on submitting PRs on GitHub
 
 ```sh
 # install
-$ git clone https://github.com/maxwofford/excitedcornsilkpackages
-$ cd excitedcornsilkpackages
+$ git clone https://github.com/hackclub/draw-dino
+$ cd draw-dino
 $ yarn install
 
 # run a live-reloading server in development
