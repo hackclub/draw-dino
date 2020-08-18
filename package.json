@@ -13,10 +13,10 @@
     "fmt": "npx prettier \"{components,pages}/*.js\" --single-quote --no-semi --trailing-comma es5 --write"
   },
   "dependencies": {
-    "next": "9.3.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "next": "9.5.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-input-autosize": "^2.2.2",
-    "react-scroll": "^1.7.14"
+    "react-scroll": "^1.8.1"
   }
 }
