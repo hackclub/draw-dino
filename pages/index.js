@@ -219,7 +219,7 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Click “Upload files” and add your dino image</p>
+          <p>Click “Add file” and add your dino image</p>
           <p>
             Below “Commit changes”, type this into the first text box:
             <Selectable>Add {getFilename()}</Selectable>
