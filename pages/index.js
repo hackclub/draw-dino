@@ -201,7 +201,7 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Find and click the dropdown “Branch: master ▼”.</p>
+          <p>Find and click the dropdown “Branch: main ▼”.</p>
           <p>
             Type in <Selectable>{getName()}</Selectable>
           </p>
