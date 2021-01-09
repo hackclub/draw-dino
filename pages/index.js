@@ -284,6 +284,7 @@ export default () => {
         <Split
           image="steps/create-pr.gif"
           imageLink="steps/create-pr.mp4"
+		  subtitle="Create a PR"
           index={index}
           progress={progress}
           setProgress={setProgress}
