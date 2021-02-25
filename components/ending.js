@@ -1,3 +1,4 @@
+import FilmGrain from './filmGrain'
 import packageJson from '../package.json'
 
 const containerStyle = {
@@ -128,6 +129,7 @@ export default () => (
           <p>ALL RIGHTS RESERVED</p>
         </div>
       </div>
+      <FilmGrain />
     </div>
   </>
 )

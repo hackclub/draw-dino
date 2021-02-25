@@ -1,4 +1,5 @@
 import ProgressButton from './progressButton'
+import FilmGrain from './filmGrain'
 
 const containerStyle = {
   width: '100%',
@@ -183,6 +184,7 @@ export default ({ index, progress, setProgress }) => (
           </div>
         </div>
       </div>
+      <FilmGrain/>
     </div>
   </>
 )

@@ -1,5 +1,6 @@
 import ProgressButton from './progressButton'
 import packageJson from '../package.json'
+import FilmGrain from './filmGrain'
 
 const containerStyle = {
   width: '100%',
@@ -188,6 +189,7 @@ export default ({ index, progress, setProgress, github }) => (
           <p>ALL RIGHTS RESERVED</p>
         </div>
       </div>
+      <FilmGrain/>
     </div>
   </>
 )
