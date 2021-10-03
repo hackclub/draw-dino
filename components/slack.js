@@ -73,7 +73,9 @@ export default ({ index, progress, setProgress, github }) => (
         filter: blur(1px);
       }
 
-      .slack-logo, .portrait, .portrait-decoration {
+      .slack-logo,
+      .portrait,
+      .portrait-decoration {
         filter: blur(0px);
       }
 
@@ -159,23 +161,40 @@ export default ({ index, progress, setProgress, github }) => (
             target="_blank"
             style={{ display: 'block', textDecoration: 'none' }}
           >
-          <img
-            className="portrait-decoration"
-            src="portrait-decoration.svg"
-            style={{height: '4em', paddingBottom: '0.5em', paddingLeft: '3px', transform: 'scaleX(-1)'}} />
-          <img
-            className="portrait"
-            src="dinoisseur.png"
-            style={{ borderRadius: '10%', height: '5em' }}
-          />
-          <img
-            className="portrait-decoration"
-            src="portrait-decoration.svg"
-            style={{height: '4em', paddingBottom: '0.5em', paddingLeft: '3px'}} />
-          <p style={{opacity: 0.5, marginTop: 0}}>:smug-dino:</p>
-            <p>Click here to sign into{' '}
-            <img src="slack.svg" className="slack-logo" style={{height: '1em'}} /> Slack
-          </p>
+            <img
+              className="portrait-decoration"
+              src="portrait-decoration.svg"
+              style={{
+                height: '4em',
+                paddingBottom: '0.5em',
+                paddingLeft: '3px',
+                transform: 'scaleX(-1)',
+              }}
+            />
+            <img
+              className="portrait"
+              src="dinoisseur.png"
+              style={{ borderRadius: '10%', height: '5em' }}
+            />
+            <img
+              className="portrait-decoration"
+              src="portrait-decoration.svg"
+              style={{
+                height: '4em',
+                paddingBottom: '0.5em',
+                paddingLeft: '3px',
+              }}
+            />
+            <p style={{ opacity: 0.5, marginTop: 0 }}>:smug-dino:</p>
+            <p>
+              Click here to sign into{' '}
+              <img
+                src="slack.svg"
+                className="slack-logo"
+                style={{ height: '1em' }}
+              />{' '}
+              Slack
+            </p>
           </a>
           <ProgressButton
             index={index}
@@ -196,7 +215,7 @@ export default ({ index, progress, setProgress, github }) => (
           </div>
         </div>
       </div>
-      <FilmGrain/>
+      <FilmGrain />
     </div>
   </>
 )

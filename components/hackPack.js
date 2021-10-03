@@ -73,7 +73,9 @@ export default ({ index, progress, setProgress }) => (
         filter: blur(1px);
       }
 
-      .slack-logo, .portrait, .portrait-decoration {
+      .slack-logo,
+      .portrait,
+      .portrait-decoration {
         filter: blur(0px);
       }
 
@@ -155,15 +157,15 @@ export default ({ index, progress, setProgress }) => (
             target="_blank"
             style={{ display: 'block', textDecoration: 'none' }}
           >
-          <img
-            className="portrait"
-            src="github.svg"
-            style={{ borderRadius: '10%', height: '5em' }}
-          />
-          <p style={{opacity: 0.5, marginTop: 0}}>Includes GitHub Pro, free domains, server credits, and much more!</p>
-          <p>
-            Click here to get the Hack Pack
-          </p>
+            <img
+              className="portrait"
+              src="github.svg"
+              style={{ borderRadius: '10%', height: '5em' }}
+            />
+            <p style={{ opacity: 0.5, marginTop: 0 }}>
+              Includes GitHub Pro, free domains, server credits, and much more!
+            </p>
+            <p>Click here to get the Hack Pack</p>
           </a>
           <ProgressButton
             index={index}
@@ -184,7 +186,7 @@ export default ({ index, progress, setProgress }) => (
           </div>
         </div>
       </div>
-      <FilmGrain/>
+      <FilmGrain />
     </div>
   </>
 )

@@ -37,7 +37,7 @@ export default () => {
     window.location.search
       .replace('?', '')
       .split('&')
-      .forEach(kvString => {
+      .forEach((kvString) => {
         const [key, value] = kvString.split('=')
         result[key] = value
       })
@@ -81,10 +81,15 @@ export default () => {
 
       {slack && (
         <>
-        <Step revealed={index <= progress}>
-          <Slack setProgress={setProgress} index={index} progress={progress} github={github} />
-        </Step>
-        {console.log(index++)}
+          <Step revealed={index <= progress}>
+            <Slack
+              setProgress={setProgress}
+              index={index}
+              progress={progress}
+              github={github}
+            />
+          </Step>
+          {console.log(index++)}
         </>
       )}
 
@@ -228,7 +233,12 @@ export default () => {
             Then click{' '}
             <span style={{ color: 'rgb(52, 208, 88)' }}>COMMIT CHANGES</span>
           </p>
-          <p>Warning: <span style={{ color: 'rgb(208, 52, 88) !important' }}>Do not</span> click the green button that says "Create pull request" just yet– we'll get there in a couple more steps.</p>
+          <p>
+            Warning:{' '}
+            <span style={{ color: 'rgb(208, 52, 88) !important' }}>Do not</span>{' '}
+            click the green button that says "Create pull request" just yet–
+            we'll get there in a couple more steps.
+          </p>
         </Split>
       </Step>
       {console.log(index++)}
@@ -311,6 +321,7 @@ export default () => {
       </Step>
       {console.log(index++)}
 
+      {/*
       <Step revealed={index <= progress}>
         <HackPack
           setProgress={setProgress}
@@ -318,7 +329,8 @@ export default () => {
           progress={progress}
         />
       </Step>
-      {console.log(index++)}
+      */}
+      {/* console.log(index++) */}
 
       <Step revealed={index <= progress}>
         <Ending />

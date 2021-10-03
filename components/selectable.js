@@ -1,5 +1,5 @@
 export default ({ children }) => {
-  const select = e => {
+  const select = (e) => {
     e.preventDefault()
     const range = document.createRange()
     const sel = window.getSelection()
