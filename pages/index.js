@@ -311,6 +311,7 @@ export default () => {
       </Step>
       {console.log(index++)}
 
+      {/*
       <Step revealed={index <= progress}>
         <HackPack
           setProgress={setProgress}
@@ -318,7 +319,8 @@ export default () => {
           progress={progress}
         />
       </Step>
-      {console.log(index++)}
+      */}
+      {/* console.log(index++) */}
 
       <Step revealed={index <= progress}>
         <Ending />
