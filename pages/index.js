@@ -186,8 +186,9 @@ export default () => {
             <a target="_blank" href="https://github.com/hackclub/dinosaurs">
               https://github.com/hackclub/dinosaurs
             </a>{' '}
-            and click “star”.
+            and click “star”. This bookmarks the repository in GitHub.
           </p>
+          <p>Afterwards, tab back to this page to continue.</p>
         </Split>
       </Step>
       {console.log(index++)}
