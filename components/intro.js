@@ -186,7 +186,7 @@ export default ({ index, progress, setProgress, github }) => (
         </ProgressButton>
         <div style={footerStyle}>
           <p>© <a href={packageJson.repository.url}>COPYTHIS FROM THE HACK FOUNDATION</a></p>
-          <p>ALL RIGHTS RESERVED</p>
+          <p>NO RIGHTS RESERVED</p>
         </div>
       </div>
       <FilmGrain/>
