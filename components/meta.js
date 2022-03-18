@@ -3,10 +3,12 @@ import Head from 'next/head'
 const fontImport = (family, weight, file) => `
 @font-face {
   font-family: '${family}';
-  ${weight &&
+  ${
+    weight &&
     `
     font-weight: ${weight};
-  `}
+  `
+  }
   src: url('fonts/${file}.woff2') format('woff2'),
        url('fonts/${file}.woff') format('woff'),
        url('fonts/${file}.ttf') format('truetype');
@@ -32,7 +34,6 @@ analytics.page();
       <title>Draw Dino</title>
     </Head>
     <style jsx global>{`
-
       @import url('https://fonts.googleapis.com/css?family=Bellefair&display=swap');
       // @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
       // @import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
@@ -53,7 +54,9 @@ analytics.page();
         font-family: 'Bellefair', serif;
       }
 
-      h1, h2, h3 {
+      h1,
+      h2,
+      h3 {
         font-family: 'Phantom Sans';
         font-weight: 800;
       }
@@ -63,7 +66,7 @@ analytics.page();
       }
 
       pre {
-        background: rgba(0,0,0,0.1);
+        background: rgba(0, 0, 0, 0.1);
         font-size: 2em;
         border-radius: 0.5rem;
         padding: 1em;
@@ -84,7 +87,6 @@ analytics.page();
         background: #ddd;
         text-shadow: none;
       }
-
     `}</style>
   </>
 )

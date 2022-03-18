@@ -125,7 +125,12 @@ export default () => (
           style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
         />
         <div style={footerStyle}>
-          <p>© <a href={packageJson.repository.url}>COPYTHIS FROM THE HACK FOUNDATION</a></p>
+          <p>
+            ©{' '}
+            <a href={packageJson.repository.url}>
+              COPYTHIS FROM THE HACK FOUNDATION
+            </a>
+          </p>
           <p>NO RIGHTS RESERVED</p>
         </div>
       </div>
