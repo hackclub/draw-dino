@@ -28,7 +28,7 @@ export default ({ setDinoName, progress, index, setProgress, filePrefix }) => {
   useEffect(() => {
     window.addEventListener(
       'message',
-      e => {
+      (e) => {
         if (e.data.filename && e.data.blob) {
           const dinoName = e.data.filename.replace('.png', '')
           setDinoName(dinoName)
