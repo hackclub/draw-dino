@@ -13,7 +13,10 @@
     "fmt": "npx prettier \"{components,pages}/*.js\" --single-quote --no-semi --trailing-comma es5 --write"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "next": "^14.1.0",
+    "passport": "^0.7.0",
+    "passport-slack": "^0.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-input-autosize": "^3.0.0",

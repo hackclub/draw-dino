@@ -4,7 +4,6 @@ const {
 const SlackStrategy = require('passport-slack').Strategy
 const passport = require('passport')
 const express = require('express')
-const fetch = require('node-fetch')
 const app = express()
 
 passport.use(new SlackStrategy({
