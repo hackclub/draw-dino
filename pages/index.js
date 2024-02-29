@@ -9,6 +9,7 @@ import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
 import Selectable from '../components/selectable'
+import metrics from '../metrics'
 
 const styleInput = {
   borderRadius: '10px',
@@ -66,6 +67,8 @@ export default () => {
   const eggLink = easterEggs[Math.floor(easterEggs.length * Math.random())]
 
   let index = 0
+  metrics.increment('success.visit', 1)
+  metrics.timing('success.visit', performance.now())
   return (
     <>
       <Meta />
