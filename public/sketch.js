@@ -1,3 +1,5 @@
+import metrics from "../metrics"
+
 // Customization
 const scaling = 3
 const canvasWidth = 256
@@ -84,8 +86,15 @@ document.querySelector('#saveButton').addEventListener('click', e => {
     canvas.toBlob(blob => {
       let safeFileName = `${filePrefix}-${filename}`.replace(/[^\w+]/g, '_')
 
+      try{
       saveAs(blob, safeFileName + '.png')
+      metrics.increment('success.save', 1)
+      metrics.timing('success.save', performance.now())
       unsavedChanges = false
+    } catch (e) {
+      metrics.increment('error.save', 0)
+      metrics.timing('error.save', performance.now())
+    }
 
       // If this is running as an embed, send the file off to the parent window
       if (window.parent) {
