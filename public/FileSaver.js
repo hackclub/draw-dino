@@ -54,11 +54,9 @@
     xhr.onload = function () {
       saveAs(xhr.response, name, opts);
     };
-
-    xhr.onerror = function () {
-      console.error('could not download file');
-    };
-
+    xhr.onerror = function() {
+      throw Error("could not download file");
+    }
     xhr.send();
   }
 

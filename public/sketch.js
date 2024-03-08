@@ -92,6 +92,7 @@ document.querySelector('#saveButton').addEventListener('click', e => {
       metrics.timing('success.save', performance.now())
       unsavedChanges = false
     } catch (e) {
+      console.log(e.message);
       metrics.increment('error.save', 0)
       metrics.timing('error.save', performance.now())
     }
