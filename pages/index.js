@@ -67,8 +67,6 @@ export default () => {
   const eggLink = easterEggs[Math.floor(easterEggs.length * Math.random())]
 
   let index = 0
-  metrics.increment('success.visit', 1)
-  metrics.timing('success.visit', performance.now())
   return (
     <>
       <Meta />
