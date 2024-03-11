@@ -1,4 +1,4 @@
-import metrics from "../metrics"
+import { sendMetric } from "../util"
 
 // Customization
 const scaling = 3
@@ -88,13 +88,11 @@ document.querySelector('#saveButton').addEventListener('click', e => {
 
       try{
       saveAs(blob, safeFileName + '.png')
-      metrics.increment('success.save', 1)
-      metrics.timing('success.save', performance.now())
+      sendMetric("increment", "success.save_drawing", 1);
       unsavedChanges = false
     } catch (e) {
       console.log(e.message);
-      metrics.increment('error.save', 0)
-      metrics.timing('error.save', performance.now())
+      sendMetric("increment", "error.save_drawing", 1);
     }
 
       // If this is running as an embed, send the file off to the parent window
