@@ -1,5 +1,5 @@
 const {
-  CLIENT_ID="2210535565.929474391893", CLIENT_SECRET="cfe9cf57c0af475ef06abccc41d0035d"
+  CLIENT_ID, CLIENT_SECRET
 } = process.env
 const SlackStrategy = require('passport-slack').Strategy
 const passport = require('passport')
