@@ -1,5 +1,5 @@
-import { StatsD } from "node-statsd";
-import { config } from "dotenv";
+const { StatsD } = require("node-statsd");
+const { config } = require("dotenv");
 
 config();
 
