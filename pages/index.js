@@ -9,7 +9,6 @@ import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
 import Selectable from '../components/selectable'
-import metrics from '../metrics'
 
 const styleInput = {
   borderRadius: '10px',
