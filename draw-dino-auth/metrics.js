@@ -16,4 +16,4 @@ const options = {
 
 const metrics = new StatsD(options);
 
-export default metrics;
+module.exports = metrics;
