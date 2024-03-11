@@ -103,7 +103,7 @@ document.querySelector('#saveButton').addEventListener('click', e => {
       unsavedChanges = false
     } catch (e) {
       console.log(e.message);
-      sendMetric("increment", "error.save_drawing", 1);
+      sendMetric("increment", "errors.save_drawing", 1);
     }
 
       // If this is running as an embed, send the file off to the parent window
