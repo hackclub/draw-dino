@@ -6,7 +6,7 @@ const passport = require('passport')
 const express = require('express')
 const fetch = require('node-fetch')
 const app = express()
-import metrics from './metrics'
+const metrics = require("./metrics.js");
 
 passport.use(new SlackStrategy({
   clientID: CLIENT_ID,
