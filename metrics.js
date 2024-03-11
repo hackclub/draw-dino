@@ -3,7 +3,7 @@ import { config } from "dotenv";
 
 config();
 
-const environment = process.node.NODE_ENV;
+const environment = process.env.NODE_ENV;
 const graphite = process.env.GRAPHITE_HOST;
 
 if (graphite == null) throw new Error("Graphite host is not configured");
