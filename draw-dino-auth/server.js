@@ -21,7 +21,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(session({ 
   // draw-dino-slack-auth
-  secret: "9f27d9b366adfd65722437c2cbf6e5b07e0c2a0e698c4816fae9d76fd96d0ae4"
+  secret: "9f27d9b366adfd65722437c2cbf6e5b07e0c2a0e698c4816fae9d76fd96d0ae4",
+  resave: true,
+  saveUninitialized: true
 }))
 app.use(require('body-parser').urlencoded({ extended: true }))
 
