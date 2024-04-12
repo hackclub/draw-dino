@@ -4,6 +4,7 @@ const {
 const SlackStrategy = require('passport-slack').Strategy
 const passport = require('passport')
 const express = require('express')
+const session = require("express-session")
 const fetch = require('node-fetch')
 const app = express()
 const metrics = require("./metrics.js");
@@ -18,6 +19,10 @@ passport.use(new SlackStrategy({
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(session({ 
+  // draw-dino-slack-auth
+  secret: "9f27d9b366adfd65722437c2cbf6e5b07e0c2a0e698c4816fae9d76fd96d0ae4"
+}))
 app.use(require('body-parser').urlencoded({ extended: true }))
 
 app.get("/failed-slack-auth", (req, res) => {
