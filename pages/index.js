@@ -24,6 +24,8 @@ const subtitleStyle = {
   opacity: 0.6,
 }
 
+const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL;
+
 export default () => {
   const [dinoName, setDinoName] = useState('')
   const [progress, setProgress] = useState(0)
@@ -46,7 +48,7 @@ export default () => {
     if (username) {
       setGithub(username)
     } else {
-      window.location.replace(`https://hack.af/make-dino?destination=${location.origin}`)
+      window.location.replace(`${GITHUB_OAUTH_URL}?destination=${location.origin}`)
     }
     if (inviteStatus) {
       setInviteStatus(inviteStatus)
