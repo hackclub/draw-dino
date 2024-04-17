@@ -186,7 +186,9 @@ export default ({ index, progress, setProgress, github }) => (
               }}
             />
             <p style={{ opacity: 0.5, marginTop: 0 }}>:smug-dino:</p>
-            <p>
+            <p style={{
+              textDecoration: "underline"
+            }}>
               Click here to sign into{" "}
               <img
                 src="slack.svg"
