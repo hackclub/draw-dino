@@ -8,6 +8,10 @@ const session = require("express-session")
 const fetch = require('node-fetch')
 const app = express()
 const metrics = require("./metrics.js");
+const { config } = require("dotenv");
+
+// load environment variables
+config();
 
 passport.use(new SlackStrategy({
   clientID: CLIENT_ID,
@@ -17,9 +21,8 @@ passport.use(new SlackStrategy({
   done(null, profile)
 }))
 
-app.use(session({ 
-  // draw-dino-slack-auth
-  secret: "9f27d9b366adfd65722437c2cbf6e5b07e0c2a0e698c4816fae9d76fd96d0ae4",
+app.use(session({
+  secret: process.env.PASSPORT_SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }))
