@@ -114,7 +114,7 @@ document.querySelector('#saveButton').addEventListener('click', e => {
   }
 })
 
-document.addEventListener('keypress', e => {
+document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
     e.preventDefault()
 
