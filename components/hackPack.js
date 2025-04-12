@@ -1,39 +1,39 @@
-import ProgressButton from "./progressButton";
-import FilmGrain from "./filmGrain";
+import ProgressButton from './progressButton'
+import FilmGrain from './filmGrain'
 
 const containerStyle = {
-  width: "100%",
-  height: "100vh",
-  minHeight: "30em",
-  overflow: "hidden",
+  width: '100%',
+  height: '100vh',
+  minHeight: '30em',
+  overflow: 'hidden',
   margin: 0,
-  background: "black",
+  background: 'black',
   fontFamily: "'Bellefair', serif",
-  display: "flex",
-  position: "relative",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  display: 'flex',
+  position: 'relative',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
 
 const bannerStyle = {
-  background: "#222",
-  boxShadow: "0 0 15vh 15vh #222",
-  textAlign: "center",
-  color: "white",
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column",
-  position: "absolute",
-  padding: "1em",
-};
+  background: '#222',
+  boxShadow: '0 0 15vh 15vh #222',
+  textAlign: 'center',
+  color: 'white',
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  padding: '1em',
+}
 
 const footerStyle = {
-  fontSize: "0.5em",
+  fontSize: '0.5em',
   textShadow: `
 1px 1px 1px #ddd,
 2px 2px 1px #ccc,
 0 0 1em black`,
-};
+}
 
 export default ({ index, progress, setProgress }) => (
   <>
@@ -114,37 +114,37 @@ export default ({ index, progress, setProgress }) => (
         <div className="">
           <img
             src="decorative-corner.png"
-            style={{ position: "absolute", top: 0, left: 0 }}
+            style={{ position: 'absolute', top: 0, left: 0 }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               right: 0,
-              transform: "rotate(90deg)",
+              transform: 'rotate(90deg)',
             }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               right: 0,
-              transform: "rotate(180deg)",
+              transform: 'rotate(180deg)',
             }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               left: 0,
-              transform: "rotate(270deg)",
+              transform: 'rotate(270deg)',
             }}
           />
           <p
-            style={{ fontFamily: "'Dancing Script', cursive", fontSize: "4em" }}
+            style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4em' }}
           >
             Optional
           </p>
@@ -155,12 +155,12 @@ export default ({ index, progress, setProgress }) => (
           <a
             href="https://hack.af/pack?ref=draw-dino"
             target="_blank"
-            style={{ display: "block", textDecoration: "none" }}
+            style={{ display: 'block', textDecoration: 'none' }}
           >
             <img
               className="portrait"
               src="github.svg"
-              style={{ borderRadius: "10%", height: "5em" }}
+              style={{ borderRadius: '10%', height: '5em' }}
             />
             <p style={{ opacity: 0.5, marginTop: 0 }}>
               Includes GitHub Pro, free domains, server credits, and much more!
@@ -173,10 +173,10 @@ export default ({ index, progress, setProgress }) => (
             setProgress={setProgress}
           >
             <div className="vertical-float">
-              <p style={{ margin: 0, fontSize: "3em" }}>Click to Continue</p>
+              <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
               <img
                 src="decorative-bottom.png"
-                style={{ width: "400px", maxWidth: "100%", margin: "0 auto" }}
+                style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
               />
             </div>
           </ProgressButton>
@@ -189,4 +189,4 @@ export default ({ index, progress, setProgress }) => (
       <FilmGrain />
     </div>
   </>
-);
+)
