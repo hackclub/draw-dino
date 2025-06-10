@@ -24,7 +24,7 @@ const subtitleStyle = {
   opacity: 0.6,
 }
 
-const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL;
+const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL
 
 export default () => {
   const [dinoName, setDinoName] = useState('')
@@ -32,7 +32,7 @@ export default () => {
   const [github, setGithub] = useState(Date.now().toString(36)) // we're putting some random value here in case we can't later figure out what the user's github username is
   const [inviteStatus, setInviteStatus] = useState('')
 
-  const slack = true;
+  const slack = true
 
   useEffect(() => {
     const result = {}
@@ -48,7 +48,9 @@ export default () => {
     if (username) {
       setGithub(username)
     } else {
-      window.location.replace(`${GITHUB_OAUTH_URL}?destination=${location.origin}`)
+      window.location.replace(
+        `${GITHUB_OAUTH_URL}?destination=${location.origin}`
+      )
     }
     if (inviteStatus) {
       setInviteStatus(inviteStatus)

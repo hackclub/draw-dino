@@ -107,8 +107,13 @@ export default ({ index, progress, setProgress, github }) => (
         font-style: italic;
         margin-top: 0;
         margin-bottom: 0;
-        text-shadow: 1px 1px 3px #ddd, 2px 2px 9px #555, 3px 3px 2px #999,
-          4px 4px 4px #999, 6px 6px 6px #999, 6px 6px 6px #999,
+        text-shadow:
+          1px 1px 3px #ddd,
+          2px 2px 9px #555,
+          3px 3px 2px #999,
+          4px 4px 4px #999,
+          6px 6px 6px #999,
+          6px 6px 6px #999,
           0.2em 0.2em 0.25em black;
       }
       @media (min-width: 992px) {
