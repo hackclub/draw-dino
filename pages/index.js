@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Scroll from 'react-scroll'
 
 import Step from '../components/step'
 import Meta from '../components/meta'
@@ -10,50 +11,162 @@ import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
 import Selectable from '../components/selectable'
 
-const styleInput = {
-  borderRadius: '10px',
-  fontSize: '1.5rem',
-}
-
-const quoteStyle = {
-  color: '#333',
-}
 
 const subtitleStyle = {
   fontStyle: 'italic',
   opacity: 0.6,
 }
 
-const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL;
+const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL
+const GITHUB_SESSION_USERNAME_KEY = 'draw-dino:github-username'
 
 export default () => {
   const [dinoName, setDinoName] = useState('')
   const [progress, setProgress] = useState(0)
-  const [github, setGithub] = useState(Date.now().toString(36)) // we're putting some random value here in case we can't later figure out what the user's github username is
+  const [github, setGithub] = useState('github-user')
   const [inviteStatus, setInviteStatus] = useState('')
+  const [showAuthToast, setShowAuthToast] = useState(false)
+  const [githubAuthError, setGithubAuthError] = useState('')
 
-  const slack = true;
+  const slack = true
 
   useEffect(() => {
-    const result = {}
-    window.location.search
-      .replace('?', '')
-      .split('&')
-      .forEach((kvString) => {
-        const [key, value] = kvString.split('=')
-        result[key] = value
-      })
+    const handleAuthSuccess = () => {
+      setShowAuthToast(true)
+      setProgress((currentProgress) =>
+        currentProgress < 2 ? 2 : currentProgress
+      )
+      Scroll.animateScroll.scrollToBottom()
+      window.setTimeout(() => {
+        setShowAuthToast(false)
+      }, 4000)
+    }
 
-    const { username, inviteStatus } = result
-    if (username) {
-      setGithub(username)
-    } else {
-      window.location.replace(`${GITHUB_OAUTH_URL}?destination=${location.origin}`)
+    const syncAuthState = async () => {
+      const params = new URLSearchParams(window.location.search)
+      const usernameParam = params.get('username')
+      const inviteStatusParam = params.get('inviteStatus')
+      const hcaAuthSuccess = params.get('hcaAuthSuccess')
+      const code = params.get('code')
+      const state = params.get('state')
+
+      const cleanUrlParams = (keys) => {
+        let changed = false
+        keys.forEach((key) => {
+          if (params.has(key)) {
+            params.delete(key)
+            changed = true
+          }
+        })
+
+        if (!changed) return
+
+        const nextSearch = params.toString()
+        const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ''}`
+        window.history.replaceState(null, '', nextUrl)
+      }
+
+      if (inviteStatusParam) {
+        setInviteStatus(inviteStatusParam)
+      }
+
+      if (hcaAuthSuccess === '1') {
+        handleAuthSuccess()
+        cleanUrlParams(['hcaAuthSuccess'])
+      }
+
+      const storedUsername = window.sessionStorage.getItem(
+        GITHUB_SESSION_USERNAME_KEY
+      )
+
+      if (storedUsername) {
+        setGithub(storedUsername)
+        setGithubAuthError('')
+        return
+      }
+
+      if (usernameParam) {
+        window.sessionStorage.setItem(GITHUB_SESSION_USERNAME_KEY, usernameParam)
+        setGithub(usernameParam)
+        setGithubAuthError('')
+        return
+      }
+
+      if (code) {
+        try {
+          const response = await fetch('/api/github/exchange', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              code,
+              state,
+              redirectUri: `${window.location.origin}${window.location.pathname}`,
+            }),
+          })
+
+          const payload = await response.json().catch(() => null)
+
+          if (!response.ok) {
+            setGithubAuthError(
+              (payload && payload.error) ||
+              'GitHub sign-in failed while exchanging the OAuth code.'
+            )
+            return
+          }
+
+          if (payload && payload.username) {
+            window.sessionStorage.setItem(
+              GITHUB_SESSION_USERNAME_KEY,
+              payload.username
+            )
+            setGithub(payload.username)
+            setGithubAuthError('')
+          } else {
+            setGithubAuthError('GitHub sign-in succeeded but no username returned.')
+          }
+        } catch (error) {
+          console.error(error)
+          setGithubAuthError('GitHub sign-in failed. Please try again.')
+        } finally {
+          cleanUrlParams(['code', 'state', 'iss'])
+        }
+
+        return
+      }
+
+      if (GITHUB_OAUTH_URL) {
+        window.location.replace(
+          `${GITHUB_OAUTH_URL}&destination=${window.location.origin}${window.location.pathname}`
+        )
+      } else {
+        setGithubAuthError('NEXT_PUBLIC_GITHUB_OAUTH_URL is not configured.')
+      }
     }
-    if (inviteStatus) {
-      setInviteStatus(inviteStatus)
+
+    syncAuthState()
+
+    const onStorage = (event) => {
+      if (event.key === 'draw-dino:hca-auth-success' && event.newValue) {
+        handleAuthSuccess()
+      }
     }
-  })
+
+    const onMessage = (event) => {
+      if (event.data && event.data.type === 'hca-auth-success') {
+        handleAuthSuccess()
+      }
+    }
+
+    window.addEventListener('storage', onStorage)
+    window.addEventListener('message', onMessage)
+
+    return () => {
+      window.removeEventListener('storage', onStorage)
+      window.removeEventListener('message', onMessage)
+    }
+  }, [])
 
   const getName = () => dinoName.replace(/[^\w+]/g, '_') || 'YOUR-DINO-NAME'
   const getFilename = () => getName() + '.png'
@@ -71,6 +184,61 @@ export default () => {
   return (
     <>
       <Meta />
+      {showAuthToast && (
+        <div
+          style={{
+            position: 'fixed',
+            right: '1rem',
+            bottom: '1rem',
+            zIndex: 1000,
+            background: '#0f5132',
+            color: '#fff',
+            padding: '0.8rem 1rem',
+            borderRadius: '8px',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+            maxWidth: '22rem',
+          }}
+        >
+          <p style={{ margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
+            Signed in with Hack Club Auth. Moving you to the next step.
+          </p>
+          <p
+            style={{
+              margin: '0.5rem 0 0 0',
+              lineHeight: 1.4,
+              fontSize: '0.9rem',
+            }}
+          >
+            To get your emoji,{' '}
+            <a
+              href="https://slack.hackclub.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#a8d5a8', textDecoration: 'underline' }}
+            >
+              join Slack!
+            </a>
+          </p>
+        </div>
+      )}
+      {githubAuthError && (
+        <div
+          style={{
+            position: 'fixed',
+            right: '1rem',
+            top: '1rem',
+            zIndex: 1000,
+            background: '#7f1d1d',
+            color: '#fff',
+            padding: '0.8rem 1rem',
+            borderRadius: '8px',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+            maxWidth: '24rem',
+          }}
+        >
+          <p style={{ margin: 0, lineHeight: 1.4 }}>{githubAuthError}</p>
+        </div>
+      )}
       <Step revealed={index <= progress}>
         <Intro
           setProgress={setProgress}
@@ -106,9 +274,9 @@ export default () => {
         >
           <h1>We take pride in our poorly-drawn dinos™</h1>
           <p>
-            And we've got the best collection anywhere in the universe™. Anyone
-            who sends us a dino drawing will earn the dinoisseur badge, as well
-            as get an exclusive emoji on Slack.
+            And we've got the best collection anywhere in the universe™. Send us
+            a dino drawing to earn the dinoisseur badge, then get an exclusive
+            emoji on Slack (through Hack Club Auth)!.
           </p>
           <img
             src="dinoisseur.png"

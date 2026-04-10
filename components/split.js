@@ -99,23 +99,21 @@ export default ({
               <img src={image} style={imageStyle} />
             </a>
             <p style={subStyle}>{subtitle || image}</p>
+            <ProgressButton
+              setProgress={setProgress}
+              index={index}
+              progress={progress}
+              style={progressStyle}
+            >
+              <img
+                src={index == progress ? 'next-white.png' : 'back-black.png'}
+                style={{ width: '100%' }}
+              />
+            </ProgressButton>
           </>
         )}
       </div>
-      <div className="side right">
-        {children}
-        <ProgressButton
-          setProgress={setProgress}
-          index={index}
-          progress={progress}
-          style={progressStyle}
-        >
-          <img
-            src={index == progress ? 'next-black.png' : 'back-black.png'}
-            style={{ width: '100%' }}
-          />
-        </ProgressButton>
-      </div>
+      <div className="side right">{children}</div>
     </div>
   </>
 )
