@@ -97,18 +97,18 @@ document.querySelector('#saveButton').addEventListener('click', e => {
     canvas.toBlob(blob => {
       let safeFileName = `${filePrefix}-${filename}`.replace(/[^\w+]/g, '_')
 
-      try{
-      saveAs(blob, safeFileName + '.png')
-      sendMetric("increment", "success.save_drawing", 1);
-      unsavedChanges = false
-    } catch (e) {
-      console.log(e.message);
-      sendMetric("increment", "errors.save_drawing", 1);
-    }
+      try {
+        saveAs(blob, safeFileName + '.png')
+        sendMetric("increment", "success.save_drawing", 1);
+        unsavedChanges = false
+      } catch (e) {
+        console.log(e.message);
+        sendMetric("increment", "errors.save_drawing", 1);
+      }
 
       // If this is running as an embed, send the file off to the parent window
       if (window.parent) {
-        window.parent.postMessage({filename: safeFileName + '.png', blob}, "*")
+        window.parent.postMessage({ filename: safeFileName + '.png', blob }, "*")
       }
     })
   }
@@ -139,12 +139,12 @@ function addClick(x, y, dragging) {
   if (dragging) {
     // get the last click and add the coordinate
     const lastClick = clicks[clicks.length - 1]
-    lastClick.points.push({x, y})
+    lastClick.points.push({ x, y })
   } else {
     // when we start clicking, we'll delete the "undone" history for good
     clicks = clicks.filter(click => !click.undone)
     // create a new click
-    clicks.push({size, color, points: [ {x, y} ]})
+    clicks.push({ size, color, points: [{ x, y }] })
   }
 }
 
@@ -228,7 +228,7 @@ canvas.addEventListener('touchcancel', e => {
 })
 
 // tooltips
-function genTooltip(id, image, description='') {
+function genTooltip(id, image, description = '') {
   tippy(`#${id}`, {
     content: `<div style="max-width: 300px;"><img src="${image}" style="max-width: 100%;" /><p style="font-weight: 500; font-family: system-ui;">${description}</p></div>`,
     delay: [500, 0],
