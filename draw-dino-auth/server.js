@@ -15,7 +15,8 @@ const {
   HACKCLUB_REDIRECT_URI,
   HACKCLUB_AUTH_DISCOVERY_URL = "https://auth.hackclub.com/.well-known/openid-configuration",
   PASSPORT_SESSION_SECRET,
-  PORT = 3000,
+  WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/507705/odyc4wo/',
+  PORT = 3001,
 } = process.env
 
 if (!HACKCLUB_CLIENT_ID) throw new Error("HACKCLUB_CLIENT_ID is not configured")
@@ -24,7 +25,6 @@ if (!HACKCLUB_REDIRECT_URI) throw new Error("HACKCLUB_REDIRECT_URI is not config
 if (!PASSPORT_SESSION_SECRET) throw new Error("PASSPORT_SESSION_SECRET is not configured")
 
 const SCOPES = ["openid", "profile", "email", "slack_id", "verification_status"]
-const WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/507705/odyc4wo/'
 
 let discoveryPromise
 
@@ -140,6 +140,7 @@ app.get(
 app.get('/oauth/callback', async (req, res) => {
   try {
     const { code, state } = req.query
+
     if (!code || !state) {
       throw new Error('Missing code or state')
     }
@@ -166,7 +167,7 @@ app.get('/oauth/callback', async (req, res) => {
       throw new Error('Missing GitHub state in session')
     }
 
-    await fetch(WEBHOOK_URL, {
+    const zapierResponse = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -180,6 +181,11 @@ app.get('/oauth/callback', async (req, res) => {
         ysws_eligible: claims.ysws_eligible,
       }),
     })
+
+
+    if (!zapierResponse.ok) {
+      throw new Error(`Zapier webhook failed: ${zapierResponse.status}`)
+    }
 
     metrics.increment("success.hackclub_auth", 1);
     req.session.github = null

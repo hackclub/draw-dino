@@ -1,39 +1,43 @@
-import FilmGrain from "./filmGrain";
-import ProgressButton from "./progressButton";
+import FilmGrain from './filmGrain'
+import ProgressButton from './progressButton'
+
+const HACKCLUB_AUTH_URL =
+  process.env.NEXT_PUBLIC_HACKCLUB_AUTH_URL ||
+  'https://draw-dino-auth.hackclub.com/update-github-url'
 
 const containerStyle = {
-  width: "100%",
-  height: "100vh",
-  minHeight: "30em",
-  overflow: "hidden",
+  width: '100%',
+  height: '100vh',
+  minHeight: '30em',
+  overflow: 'hidden',
   margin: 0,
-  background: "black",
+  background: 'black',
   fontFamily: "'Bellefair', serif",
-  display: "flex",
-  position: "relative",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  display: 'flex',
+  position: 'relative',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
 
 const bannerStyle = {
-  background: "#222",
-  boxShadow: "0 0 15vh 15vh #222",
-  textAlign: "center",
-  color: "white",
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column",
-  position: "absolute",
-  padding: "1em",
-};
+  background: '#222',
+  boxShadow: '0 0 15vh 15vh #222',
+  textAlign: 'center',
+  color: 'white',
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  padding: '1em',
+}
 
 const footerStyle = {
-  fontSize: "0.5em",
+  fontSize: '0.5em',
   textShadow: `
 1px 1px 1px #ddd,
 2px 2px 1px #ccc,
 0 0 1em black`,
-};
+}
 
 export default ({ index, progress, setProgress, github }) => (
   <>
@@ -73,7 +77,6 @@ export default ({ index, progress, setProgress, github }) => (
         filter: blur(1px);
       }
 
-      .slack-logo,
       .portrait,
       .portrait-decoration {
         filter: blur(0px);
@@ -114,88 +117,93 @@ export default ({ index, progress, setProgress, github }) => (
         <div className="">
           <img
             src="decorative-corner.png"
-            style={{ position: "absolute", top: 0, left: 0 }}
+            style={{ position: 'absolute', top: 0, left: 0 }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               right: 0,
-              transform: "rotate(90deg)",
+              transform: 'rotate(90deg)',
             }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               right: 0,
-              transform: "rotate(180deg)",
+              transform: 'rotate(180deg)',
             }}
           />
           <img
             src="decorative-corner.png"
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               left: 0,
-              transform: "rotate(270deg)",
+              transform: 'rotate(270deg)',
             }}
           />
           <p
-            style={{ fontFamily: "'Dancing Script', cursive", fontSize: "4em" }}
+            style={{ fontFamily: "'Dancing Script', cursive", fontSize: '4em' }}
           >
             Optional
           </p>
           <p>
             Orpheus says: <br />
-            “If you're a Hack Clubber, sign in to Slack for an exclusive emoji!”
+            “If you're a Hack Clubber, sign in with Hack Club Auth for an
+            exclusive emoji on{' '}
+            <a
+              href="https://slack.hackclub.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Slack
+            </a>
+            !”
           </p>
 
           <a
-            href={
-              "https://hack.af/make-dino-slack-auth?state=https://github.com/" +
-              github
-            }
+            href={`${HACKCLUB_AUTH_URL}?state=${encodeURIComponent(
+              `https://github.com/${github}`
+            )}`}
             target="_blank"
-            style={{ display: "block", textDecoration: "none" }}
+            rel="opener"
+            style={{ display: 'block', textDecoration: 'none' }}
           >
             <img
               className="portrait-decoration"
               src="portrait-decoration.svg"
               style={{
-                height: "4em",
-                paddingBottom: "0.5em",
-                paddingLeft: "3px",
-                transform: "scaleX(-1)",
+                height: '4em',
+                paddingBottom: '0.5em',
+                paddingLeft: '3px',
+                transform: 'scaleX(-1)',
               }}
             />
             <img
               className="portrait"
               src="dinoisseur.png"
-              style={{ borderRadius: "10%", height: "5em" }}
+              style={{ borderRadius: '10%', height: '5em' }}
             />
             <img
               className="portrait-decoration"
               src="portrait-decoration.svg"
               style={{
-                height: "4em",
-                paddingBottom: "0.5em",
-                paddingLeft: "3px",
+                height: '4em',
+                paddingBottom: '0.5em',
+                paddingLeft: '3px',
               }}
             />
             <p style={{ opacity: 0.5, marginTop: 0 }}>:smug-dino:</p>
-            <p style={{
-              textDecoration: "underline"
-            }}>
-              Click here to sign into{" "}
-              <img
-                src="slack.svg"
-                className="slack-logo"
-                style={{ height: "1em" }}
-              />{" "}
-              Slack
+            <p
+              style={{
+                textDecoration: 'underline',
+              }}
+            >
+              Click here to sign into Hack Club Auth
             </p>
           </a>
           <ProgressButton
@@ -204,10 +212,10 @@ export default ({ index, progress, setProgress, github }) => (
             setProgress={setProgress}
           >
             <div className="vertical-float">
-              <p style={{ margin: 0, fontSize: "3em" }}>Click to Continue</p>
+              <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
               <img
                 src="decorative-bottom.png"
-                style={{ width: "400px", maxWidth: "100%", margin: "0 auto" }}
+                style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
               />
             </div>
           </ProgressButton>
@@ -220,4 +228,4 @@ export default ({ index, progress, setProgress, github }) => (
       <FilmGrain />
     </div>
   </>
-);
+)
