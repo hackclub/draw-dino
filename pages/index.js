@@ -4,7 +4,6 @@ import Scroll from 'react-scroll'
 import Step from '../components/step'
 import Meta from '../components/meta'
 import Intro from '../components/intro'
-import HackPack from '../components/hackPack'
 import Slack from '../components/slack'
 import Ending from '../components/ending'
 import SketchEmbed from '../components/sketchEmbed'
@@ -17,7 +16,7 @@ const subtitleStyle = {
   opacity: 0.6,
 }
 
-const GITHUB_OAUTH_URL = process.env.NEXT_PUBLIC_GITHUB_OAUTH_URL
+const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
 const GITHUB_SESSION_USERNAME_KEY = 'draw-dino:github-username'
 
 export default () => {
@@ -136,12 +135,12 @@ export default () => {
         return
       }
 
-      if (GITHUB_OAUTH_URL) {
+      if (GITHUB_CLIENT_ID) {
         window.location.replace(
-          `${GITHUB_OAUTH_URL}&destination=${window.location.origin}${window.location.pathname}`
+          `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(`${window.location.origin}${window.location.pathname}`)}&scope=read:user`
         )
       } else {
-        setGithubAuthError('NEXT_PUBLIC_GITHUB_OAUTH_URL is not configured.')
+        setGithubAuthError('NEXT_PUBLIC_GITHUB_CLIENT_ID is not configured.')
       }
     }
 
@@ -491,17 +490,6 @@ export default () => {
         </Split>
       </Step>
       {console.log(index++)}
-
-      {/*
-      <Step revealed={index <= progress}>
-        <HackPack
-          setProgress={setProgress}
-          index={index}
-          progress={progress}
-        />
-      </Step>
-      */}
-      {/* console.log(index++) */}
 
       <Step revealed={index <= progress}>
         <Ending />

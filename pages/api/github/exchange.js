@@ -6,7 +6,7 @@ export default async function githubExchange(req, res) {
         return res.status(405).json({ error: 'Method not supported' })
     }
 
-    const clientId = process.env.GITHUB_CLIENT_ID
+    const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
     const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
     if (!clientId || !clientSecret) {
