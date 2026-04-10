@@ -1,5 +1,5 @@
 {
-  "name": "slack-oauth",
+  "name": "hackclub-oidc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,9 +14,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "node-fetch": "^2.6.0",
     "node-statsd": "^0.1.1",
-    "passport": "^0.7.0",
-    "passport-slack": "0.0.7"
+    "jose": "^5.9.6"
   }
 }
