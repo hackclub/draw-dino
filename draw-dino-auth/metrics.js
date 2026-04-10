@@ -1,19 +1,22 @@
-const { StatsD } = require("node-statsd");
-const { config } = require("dotenv");
+const { StatsD } = require('node-statsd')
+const { config } = require('dotenv')
 
-config();
+config()
 
-const environment = process.env.NODE_ENV;
-const graphite = process.env.GRAPHITE_HOST;
+const environment = process.env.NODE_ENV
+const graphite = process.env.GRAPHITE_HOST
 
-if (graphite == null) throw new Error("Graphite host is not configured");
+const noopMetrics = {
+    increment() { },
+    timing() { },
+}
 
-const options = {
-  host: graphite,
-  port: 8125,
-  prefix: `${environment}.dino.`,
-};
-
-const metrics = new StatsD(options);
-
-module.exports = metrics;
+if (!graphite) {
+    module.exports = noopMetrics
+} else {
+    module.exports = new StatsD({
+        host: graphite,
+        port: 8125,
+        prefix: `${environment}.dino.`,
+    })
+}
