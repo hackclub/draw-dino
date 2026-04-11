@@ -2,8 +2,7 @@ import FilmGrain from './filmGrain'
 import ProgressButton from './progressButton'
 
 const HACKCLUB_AUTH_URL =
-  process.env.NEXT_PUBLIC_HACKCLUB_AUTH_URL ||
-  '/api/hca/start'
+  process.env.NEXT_PUBLIC_HACKCLUB_AUTH_URL || '/api/hca/start'
 
 const containerStyle = {
   width: '100%',
