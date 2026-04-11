@@ -3,7 +3,7 @@ import ProgressButton from './progressButton'
 
 const HACKCLUB_AUTH_URL =
   process.env.NEXT_PUBLIC_HACKCLUB_AUTH_URL ||
-  'https://draw-dino-auth.hackclub.com/update-github-url'
+  '/api/hca/start'
 
 const containerStyle = {
   width: '100%',

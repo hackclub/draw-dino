@@ -46,6 +46,7 @@ export default () => {
       const usernameParam = params.get('username')
       const inviteStatusParam = params.get('inviteStatus')
       const hcaAuthSuccess = params.get('hcaAuthSuccess')
+      const hcaAuthError = params.get('hcaAuthError')
       const code = params.get('code')
       const state = params.get('state')
 
@@ -72,6 +73,11 @@ export default () => {
       if (hcaAuthSuccess === '1') {
         handleAuthSuccess()
         cleanUrlParams(['hcaAuthSuccess'])
+      }
+
+      if (hcaAuthError === '1') {
+        setGithubAuthError('Hack Club sign-in failed. Please try again.')
+        cleanUrlParams(['hcaAuthError'])
       }
 
       const storedUsername = window.sessionStorage.getItem(
@@ -137,7 +143,7 @@ export default () => {
 
       if (GITHUB_CLIENT_ID) {
         window.location.replace(
-          `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(`${window.location.origin}${window.location.pathname}`)}&scope=read:user`
+          `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=read:user`
         )
       } else {
         setGithubAuthError('NEXT_PUBLIC_GITHUB_CLIENT_ID is not configured.')
