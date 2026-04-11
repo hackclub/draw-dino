@@ -10,7 +10,6 @@ import SketchEmbed from '../components/sketchEmbed'
 import Split from '../components/split'
 import Selectable from '../components/selectable'
 
-
 const subtitleStyle = {
   fontStyle: 'italic',
   opacity: 0.6,
@@ -91,7 +90,10 @@ export default () => {
       }
 
       if (usernameParam) {
-        window.sessionStorage.setItem(GITHUB_SESSION_USERNAME_KEY, usernameParam)
+        window.sessionStorage.setItem(
+          GITHUB_SESSION_USERNAME_KEY,
+          usernameParam
+        )
         setGithub(usernameParam)
         setGithubAuthError('')
         return
@@ -116,7 +118,7 @@ export default () => {
           if (!response.ok) {
             setGithubAuthError(
               (payload && payload.error) ||
-              'GitHub sign-in failed while exchanging the OAuth code.'
+                'GitHub sign-in failed while exchanging the OAuth code.'
             )
             return
           }
@@ -129,7 +131,9 @@ export default () => {
             setGithub(payload.username)
             setGithubAuthError('')
           } else {
-            setGithubAuthError('GitHub sign-in succeeded but no username returned.')
+            setGithubAuthError(
+              'GitHub sign-in succeeded but no username returned.'
+            )
           }
         } catch (error) {
           console.error(error)
