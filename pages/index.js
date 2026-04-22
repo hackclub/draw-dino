@@ -118,7 +118,7 @@ export default () => {
           if (!response.ok) {
             setGithubAuthError(
               (payload && payload.error) ||
-                'GitHub sign-in failed while exchanging the OAuth code.'
+              'GitHub sign-in failed while exchanging the OAuth code.'
             )
             return
           }
@@ -147,7 +147,7 @@ export default () => {
 
       if (GITHUB_CLIENT_ID) {
         window.location.replace(
-          `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=read:user`
+          `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=org&redirect_uri=https://github-oauth.hackclub.com/dinoissour-badge`
         )
       } else {
         setGithubAuthError('NEXT_PUBLIC_GITHUB_CLIENT_ID is not configured.')
