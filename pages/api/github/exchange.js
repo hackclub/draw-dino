@@ -1,7 +1,13 @@
+const { Octokit } = require("octokit");
+
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
 const GITHUB_USER_URL = 'https://api.github.com/user'
 
-export default async function githubExchange(req, res) {
+const octokit = new Octokit({
+    auth: process.env.GITHUB_FOR_DINOISSEUR_PAT
+});
+
+export default async function githubExchangeAndInvite(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not supported' })
     }
@@ -58,7 +64,17 @@ export default async function githubExchange(req, res) {
             })
         }
 
-        return res.status(200).json({ username: userPayload.login })
+        const invite = await octokit.request('PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', {
+            org: 'hackclub',
+            team_slug: "Dinoisseurs",
+            username: userPayload.login,
+            role: 'member',
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+        });
+
+        return res.status(200).json({ username: userPayload.login, inviteStatus: invite.data.state })
     } catch (error) {
         console.error(error)
         return res.status(500).json({ error: 'GitHub exchange request failed' })
