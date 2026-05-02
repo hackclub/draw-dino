@@ -16,6 +16,7 @@
     "dotenv": "^16.4.5",
     "next": "^14.1.1",
     "node-statsd": "^0.1.1",
+    "octokit": "^5.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-input-autosize": "^2.2.2",
