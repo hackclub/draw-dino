@@ -1,11 +1,19 @@
-export default ({ children }) => {
-  const select = (e) => {
+import { FC, ReactNode } from 'react'
+
+interface SelectableProps {
+  children: ReactNode
+}
+
+const Selectable: FC<SelectableProps> = ({ children }) => {
+  const select = (e: React.MouseEvent<HTMLPreElement>) => {
     e.preventDefault()
     const range = document.createRange()
     const sel = window.getSelection()
-    range.selectNodeContents(e.target)
-    sel.removeAllRanges()
-    sel.addRange(range)
+    if (sel) {
+      range.selectNodeContents(e.currentTarget)
+      sel.removeAllRanges()
+      sel.addRange(range)
+    }
     document.createRange()
   }
 
@@ -27,3 +35,5 @@ export default ({ children }) => {
     </>
   )
 }
+
+export default Selectable

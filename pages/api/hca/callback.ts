@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
   HCA_STATE_COOKIE,
   HCA_STATE_TTL_SECONDS,
@@ -14,12 +15,17 @@ const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
   'https://hooks.zapier.com/hooks/catch/507705/odyc4wo/'
 
-function isWebhookRequired() {
+function isWebhookRequired(): boolean {
   // Webhook failures should not block auth unless explicitly required.
   return process.env.HCA_REQUIRE_WEBHOOK === '1'
 }
 
-function authFailure(req, res, message, error) {
+function authFailure(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  message: string,
+  error?: Error
+): void {
   if (error) {
     console.error(error)
   } else {
@@ -30,7 +36,10 @@ function authFailure(req, res, message, error) {
   res.redirect(302, '/?hcaAuthError=1')
 }
 
-export default async function hcaCallback(req, res) {
+export default async function hcaCallback(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   if (req.method !== 'GET') {
     res.status(405).send('Method not supported')
     return
@@ -174,7 +183,7 @@ export default async function hcaCallback(req, res) {
     res.status(200).send(bridgeHtml)
     return
   } catch (error) {
-    authFailure(req, res, 'Hack Club authentication failed', error)
+    authFailure(req, res, 'Hack Club authentication failed', error instanceof Error ? error : new Error(String(error)))
     return
   }
 }

@@ -1,4 +1,25 @@
-async function sendMetric(type, key, value) {
+// Declare global types
+declare const G_vmlCanvasManager: any
+declare function saveAs(blob: Blob, filename: string): void
+declare function tippy(selector: string, options: any): void
+
+interface Point {
+  x: number
+  y: number
+}
+
+interface Click {
+  size: number
+  color: string
+  points: Point[]
+  undone?: boolean
+}
+
+interface UrlParams {
+  [key: string]: string
+}
+
+async function sendMetric(type: string, key: string, value: number): Promise<void> {
   const response = await fetch("/api/metric", {
     method: "POST",
     headers: {
@@ -20,73 +41,88 @@ const backgroundColor = 'white'
 const thinSize = 2
 const thickSize = 4
 
-var clicks = []
-var templateVisibility = true
-var size = thinSize
-var color = drawColor
-var unsavedChanges = false
-var paint
+let clicks: Click[] = []
+let templateVisibility = true
+let size = thinSize
+let color = drawColor
+let unsavedChanges = false
+let paint = false
+let mouseX = 0
+let mouseY = 0
 
 // Initialization
-const canvasDiv = document.querySelector('#canvasDiv')
-canvas = document.createElement('canvas')
-canvas.setAttribute('width', canvasWidth)
-canvas.setAttribute('height', canvasHeight)
+const canvasDiv = document.querySelector('#canvasDiv') as HTMLElement
+const canvas = document.createElement('canvas')
+canvas.setAttribute('width', String(canvasWidth))
+canvas.setAttribute('height', String(canvasHeight))
 canvas.setAttribute('id', 'canvas')
 const pixelation = 'image-rendering: crisp-edges; image-rendering: pixelated;'
 const borders = 'border: 1px solid black;'
 canvas.setAttribute('style', `${pixelation} ${borders} width: ${canvasWidth * scaling}px; height: ${canvasHeight * scaling}px;`)
 canvasDiv.appendChild(canvas)
 if (typeof G_vmlCanvasManager != 'undefined') {
-  canvas = G_vmlCanvasManager.initElement(canvas)
+  G_vmlCanvasManager.initElement(canvas)
 }
-context = canvas.getContext('2d')
+const context = canvas.getContext('2d') as CanvasRenderingContext2D
 const templateImage = new Image()
 templateImage.src = 'template.jpg'
-templateImage.addEventListener('load', e => {
+templateImage.addEventListener('load', () => {
   redraw()
 })
 
 // Buttons & tools
-document.querySelector('#thickButton').addEventListener('click', e => {
+const thickButton = document.querySelector('#thickButton') as HTMLElement
+const thinButton = document.querySelector('#thinButton') as HTMLElement
+const eraseButton = document.querySelector('#eraseButton') as HTMLElement
+const templateButton = document.querySelector('#templateButton') as HTMLElement
+const undoButton = document.querySelector('#undoButton') as HTMLElement
+const redoButton = document.querySelector('#redoButton') as HTMLElement
+const saveButton = document.querySelector('#saveButton') as HTMLElement
+
+thickButton.addEventListener('click', () => {
   size = thickSize
   color = drawColor
 })
-document.querySelector('#thinButton').addEventListener('click', e => {
+thinButton.addEventListener('click', () => {
   size = thinSize
   color = drawColor
 })
-document.querySelector('#eraseButton').addEventListener('click', e => {
+eraseButton.addEventListener('click', () => {
   color = backgroundColor
 })
-document.querySelector('#templateButton').addEventListener('click', e => {
+templateButton.addEventListener('click', () => {
   templateVisibility = !templateVisibility
   redraw()
 })
-function undo() {
+
+function undo(): void {
   const doneClicks = clicks.filter(click => !click.undone)
   if (doneClicks.length > 0) {
     doneClicks[doneClicks.length - 1].undone = true
     redraw()
   }
 }
-document.querySelector('#undoButton').addEventListener('click', e => {
+
+undoButton.addEventListener('click', () => {
   undo()
 })
-function redo() {
+
+function redo(): void {
   const recentUndoneClick = clicks.find(click => click.undone)
   if (recentUndoneClick) {
     recentUndoneClick.undone = false
     redraw()
   }
 }
-document.querySelector('#redoButton').addEventListener('click', e => {
+
+redoButton.addEventListener('click', () => {
   redo()
 })
-document.querySelector('#saveButton').addEventListener('click', e => {
+
+saveButton.addEventListener('click', () => {
   const filename = prompt("Name your dino drawing", "dino")
 
-  const urlParams = {}
+  const urlParams: UrlParams = {}
   window.location.search.replace('?', '').split('&').forEach(kvString => {
     const [key, value] = kvString.split('=')
     urlParams[key] = value
@@ -94,14 +130,14 @@ document.querySelector('#saveButton').addEventListener('click', e => {
   const filePrefix = urlParams['filePrefix']
 
   if (filename) {
-    canvas.toBlob(blob => {
+    canvas.toBlob((blob: Blob) => {
       let safeFileName = `${filePrefix}-${filename}`.replace(/[^\w+]/g, '_')
 
       try {
         saveAs(blob, safeFileName + '.png')
         sendMetric("increment", "success.save_drawing", 1);
         unsavedChanges = false
-      } catch (e) {
+      } catch (e: any) {
         console.log(e.message);
         sendMetric("increment", "errors.save_drawing", 1);
       }
@@ -114,28 +150,26 @@ document.querySelector('#saveButton').addEventListener('click', e => {
   }
 })
 
-document.addEventListener('keypress', e => {
+document.addEventListener('keypress', (e: KeyboardEvent) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
     e.preventDefault()
-
     undo()
   }
   if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
     e.preventDefault()
-
     redo()
   }
 })
 
 // double check with user before closing the page
-window.addEventListener('beforeunload', e => {
+window.addEventListener('beforeunload', (e: BeforeUnloadEvent) => {
   if (unsavedChanges) {
     e.returnValue = 'You have unsaved changes that will be lost.';
   }
 });
 
 // sketching
-function addClick(x, y, dragging) {
+function addClick(x: number, y: number, dragging: boolean): void {
   if (dragging) {
     // get the last click and add the coordinate
     const lastClick = clicks[clicks.length - 1]
@@ -148,7 +182,7 @@ function addClick(x, y, dragging) {
   }
 }
 
-function redraw() {
+function redraw(): void {
   context.fillStyle = backgroundColor
   context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 
@@ -158,7 +192,7 @@ function redraw() {
 
   context.strokeStyle = drawColor
 
-  clicks.filter(clicks => !clicks.undone).forEach(click => {
+  clicks.filter(click => !click.undone).forEach(click => {
     context.beginPath()
     for (let i = 0; i < click.points.length; i++) {
       context.beginPath()
@@ -178,57 +212,71 @@ function redraw() {
   })
 }
 
-function clickStart(event) {
+function clickStart(event: MouseEvent | TouchEvent): void {
   event.preventDefault()
   unsavedChanges = true
-  mouseX = (event.pageX - canvas.offsetLeft) / scaling
-  mouseY = (event.pageY - canvas.offsetTop) / scaling
+  if (event instanceof MouseEvent) {
+    mouseX = (event.pageX - canvas.offsetLeft) / scaling
+    mouseY = (event.pageY - canvas.offsetTop) / scaling
+  } else if (event instanceof TouchEvent) {
+    const touch = event.touches[0]
+    mouseX = (touch.pageX - canvas.offsetLeft) / scaling
+    mouseY = (touch.pageY - canvas.offsetTop) / scaling
+  }
   addClick(mouseX, mouseY, false)
   paint = true
   redraw()
 }
 
-canvas.addEventListener('mousedown', e => {
+canvas.addEventListener('mousedown', (e: MouseEvent) => {
   clickStart(e)
 })
-canvas.addEventListener('touchstart', e => {
+canvas.addEventListener('touchstart', (e: TouchEvent) => {
   clickStart(e)
 })
 
-function clickDrag(event) {
+function clickDrag(event: MouseEvent | TouchEvent): void {
   event.preventDefault()
   if (paint) {
-    mouseX = (event.pageX - canvas.offsetLeft) / scaling
-    mouseY = (event.pageY - canvas.offsetTop) / scaling
+    if (event instanceof MouseEvent) {
+      mouseX = (event.pageX - canvas.offsetLeft) / scaling
+      mouseY = (event.pageY - canvas.offsetTop) / scaling
+    } else if (event instanceof TouchEvent) {
+      const touch = event.touches[0]
+      mouseX = (touch.pageX - canvas.offsetLeft) / scaling
+      mouseY = (touch.pageY - canvas.offsetTop) / scaling
+    }
     addClick(mouseX, mouseY, true)
     redraw()
   }
 }
-canvas.addEventListener('mousemove', e => {
+
+canvas.addEventListener('mousemove', (e: MouseEvent) => {
   clickDrag(e)
 })
-canvas.addEventListener('touchmove', e => {
+canvas.addEventListener('touchmove', (e: TouchEvent) => {
   clickDrag(e)
 })
 
-function clickStop() {
+function clickStop(): void {
   paint = false
 }
-canvas.addEventListener('mouseup', e => {
+
+canvas.addEventListener('mouseup', () => {
   clickStop()
 })
-canvas.addEventListener('mouseleave', e => {
+canvas.addEventListener('mouseleave', () => {
   clickStop()
 })
-canvas.addEventListener('touchstop', e => {
+canvas.addEventListener('touchend', () => {
   clickStop()
 })
-canvas.addEventListener('touchcancel', e => {
+canvas.addEventListener('touchcancel', () => {
   clickStop()
 })
 
 // tooltips
-function genTooltip(id, image, description = '') {
+function genTooltip(id: string, image: string, description: string = ''): void {
   tippy(`#${id}`, {
     content: `<div style="max-width: 300px;"><img src="${image}" style="max-width: 100%;" /><p style="font-weight: 500; font-family: system-ui;">${description}</p></div>`,
     delay: [500, 0],
@@ -236,6 +284,7 @@ function genTooltip(id, image, description = '') {
     placement: 'bottom'
   })
 }
+
 genTooltip('thinButton', 'thin-button.gif', 'Draw a <span style="font-weight: 100;">thin</span> black line')
 genTooltip('thickButton', 'thick-button.gif', 'Draw a <span style="font-weight: 800;">thick</span> black line')
 genTooltip('templateButton', 'template-button.gif', 'Show a dino outline you can use as a starting point. You can toggle it on and off anytime.')

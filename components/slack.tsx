@@ -1,5 +1,13 @@
+import { FC } from 'react'
 import FilmGrain from './filmGrain'
 import ProgressButton from './progressButton'
+
+interface SlackProps {
+  index: number
+  progress: number
+  setProgress: (progress: number) => void
+  github: string
+}
 
 const HACKCLUB_AUTH_URL =
   process.env.NEXT_PUBLIC_HACKCLUB_AUTH_URL || '/api/hca/start'
@@ -8,12 +16,12 @@ const containerStyle = {
   width: '100%',
   height: '100vh',
   minHeight: '30em',
-  overflow: 'hidden',
+  overflow: 'hidden' as const,
   margin: 0,
   background: 'black',
   fontFamily: "'Bellefair', serif",
-  display: 'flex',
-  position: 'relative',
+  display: 'flex' as const,
+  position: 'relative' as const,
   alignItems: 'center',
   justifyContent: 'center',
 }
@@ -21,12 +29,12 @@ const containerStyle = {
 const bannerStyle = {
   background: '#222',
   boxShadow: '0 0 15vh 15vh #222',
-  textAlign: 'center',
+  textAlign: 'center' as const,
   color: 'white',
   margin: '0 auto',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
+  display: 'flex' as const,
+  flexDirection: 'column' as const,
+  position: 'absolute' as const,
   padding: '1em',
 }
 
@@ -38,7 +46,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress, github }) => (
+const Slack: FC<SlackProps> = ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`
       @keyframes blur-in {
@@ -152,7 +160,7 @@ export default ({ index, progress, setProgress, github }) => (
           </p>
           <p>
             Orpheus says: <br />
-            “If you're a Hack Clubber, sign in with Hack Club Auth for an
+            "If you're a Hack Clubber, sign in with Hack Club Auth for an
             exclusive emoji on{' '}
             <a
               href="https://slack.hackclub.com"
@@ -161,7 +169,7 @@ export default ({ index, progress, setProgress, github }) => (
             >
               Slack
             </a>
-            !”
+            !"
           </p>
 
           <a
@@ -197,34 +205,22 @@ export default ({ index, progress, setProgress, github }) => (
               }}
             />
             <p style={{ opacity: 0.5, marginTop: 0 }}>:smug-dino:</p>
-            <p
-              style={{
-                textDecoration: 'underline',
-              }}
-            >
-              Click here to sign into Hack Club Auth
-            </p>
           </a>
           <ProgressButton
             index={index}
             progress={progress}
             setProgress={setProgress}
           >
-            <div className="vertical-float">
-              <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
-              <img
-                src="decorative-bottom.png"
-                style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
-              />
-            </div>
+            <img
+              src="next-white.png"
+              style={{ height: '3em' }}
+            />
           </ProgressButton>
-          <div style={footerStyle}>
-            <p>© COPYWRONG THE HACK FOUNDATION</p>
-            <p>NO RIGHTS RESERVED</p>
-          </div>
         </div>
       </div>
       <FilmGrain />
     </div>
   </>
 )
+
+export default Slack

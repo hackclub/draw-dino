@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "fmt": "npx prettier \"{components,pages}/*.js\" --single-quote --no-semi --trailing-comma es5 --write"
+    "fmt": "npx prettier \"{components,pages}/**/*.{ts,tsx}\" --single-quote --no-semi --trailing-comma es5 --write"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -20,5 +20,11 @@
     "react-dom": "^18.2.0",
     "react-input-autosize": "^2.2.2",
     "react-scroll": "^1.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   }
 }

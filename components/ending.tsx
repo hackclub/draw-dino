@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import FilmGrain from './filmGrain'
 import packageJson from '../package.json'
 
@@ -5,12 +6,12 @@ const containerStyle = {
   width: '100%',
   height: '100vh',
   minHeight: '30em',
-  overflow: 'hidden',
+  overflow: 'hidden' as const,
   margin: 0,
   background: 'black',
   fontFamily: "'Bellefair', serif",
-  display: 'flex',
-  position: 'relative',
+  display: 'flex' as const,
+  position: 'relative' as const,
   alignItems: 'center',
   justifyContent: 'center',
 }
@@ -18,12 +19,12 @@ const containerStyle = {
 const bannerStyle = {
   background: '#222',
   boxShadow: '0 0 15vh 15vh #222',
-  textAlign: 'center',
+  textAlign: 'center' as const,
   color: 'white',
   margin: '0 auto',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
+  display: 'flex' as const,
+  flexDirection: 'column' as const,
+  position: 'absolute' as const,
   padding: '1em',
 }
 
@@ -32,7 +33,7 @@ const titleStyle = {
   fontSize: '8em',
   padding: '1em',
   paddingBottom: 0,
-  fontStyle: 'italic',
+  fontStyle: 'italic' as const,
   marginTop: 0,
   marginBottom: 0,
   textShadow: `
@@ -53,7 +54,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default () => (
+const Ending: FC = () => (
   <>
     <style jsx>{`
       div > div > * {
@@ -118,7 +119,7 @@ export default () => (
         <h1 style={titleStyle}>The End</h1>
         <p style={{ fontSize: '2em' }}>
           Orpheus says: <br />
-          “That's all for now folks!”
+          "That's all for now folks!"
         </p>
         <img
           src="decorative-bottom.png"
@@ -138,3 +139,5 @@ export default () => (
     </div>
   </>
 )
+
+export default Ending

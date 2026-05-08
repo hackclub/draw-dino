@@ -1,6 +1,15 @@
+import { FC, ReactNode } from 'react'
 import Scroll from 'react-scroll'
 
-export default ({ children, setProgress, index, progress, ...props }) => {
+interface ProgressButtonProps {
+  children: ReactNode
+  setProgress: (progress: number) => void
+  index: number
+  progress: number
+  [key: string]: any
+}
+
+const ProgressButton: FC<ProgressButtonProps> = ({ children, setProgress, index, progress, ...props }) => {
   const active = index == progress
 
   const onClick = () => {
@@ -31,3 +40,5 @@ export default ({ children, setProgress, index, progress, ...props }) => {
     </>
   )
 }
+
+export default ProgressButton

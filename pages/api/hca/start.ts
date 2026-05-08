@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
 
 import {
@@ -10,7 +11,10 @@ import {
   serializeCookie,
 } from './_lib'
 
-export default async function hcaStart(req, res) {
+export default async function hcaStart(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   if (req.method !== 'GET') {
     return res.status(405).send('Method not supported')
   }
