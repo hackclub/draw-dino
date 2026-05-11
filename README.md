@@ -8,14 +8,14 @@ Hack Club's workshop on submitting PRs on GitHub
 # install
 $ git clone https://github.com/hackclub/draw-dino
 $ cd draw-dino
-$ yarn install
+$ bun install
 
 # run a live-reloading server in development
-$ yarn dev
+$ bun run dev
 ```
 
 Before committing, make sure to run the built-in formatter:
 
 ```sh
-$ yarn fmt
+$ bun run fmt
 ```
