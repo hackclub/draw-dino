@@ -24,7 +24,7 @@
 
     /* Next.js */
     "incremental": true,
-    "types": ["next", "next/global"]
+    "types": ["next"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
