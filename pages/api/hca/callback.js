@@ -94,11 +94,11 @@ export default async function hcaCallback(req, res) {
     const verifiedClaims = parseJwtPayload(tokens.id_token)
     const userInfo = await fetchUserInfo(tokens.access_token)
     const claims = { ...verifiedClaims, ...userInfo }
-    const slackId = claims.slack_id || claims.sub
+    // const slackId = claims.slack_id || claims.sub
 
-    if (!slackId) {
-      throw new Error('Missing slack_id claim')
-    }
+    // if (!slackId) {
+    //   throw new Error('Missing slack_id claim')
+    // }
 
     try {
       const zapierResponse = await fetch(WEBHOOK_URL, {
@@ -107,7 +107,7 @@ export default async function hcaCallback(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          slack: slackId,
+          slack: claims.slack_id || claims.sub || 'unknown',
           github: savedState.github,
           name: claims.name,
           email: claims.email,
