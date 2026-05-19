@@ -11,7 +11,7 @@ export const HCA_SCOPES = [
   'openid',
   'profile',
   'email',
-  'slack_id',
+  'name',
   'verification_status',
 ]
 
