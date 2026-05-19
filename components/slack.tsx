@@ -38,6 +38,14 @@ const bannerStyle = {
   padding: '1em',
 }
 
+const footerStyle = {
+  fontSize: '0.5em',
+  textShadow: `
+1px 1px 1px #ddd,
+2px 2px 1px #ccc,
+0 0 1em black`,
+}
+
 const Slack: FC<SlackProps> = ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`
@@ -197,17 +205,31 @@ const Slack: FC<SlackProps> = ({ index, progress, setProgress, github }) => (
               }}
             />
             <p style={{ opacity: 0.5, marginTop: 0 }}>:smug-dino:</p>
+            <p
+              style={{
+                textDecoration: 'underline',
+              }}
+            >
+              Click here to sign into Hack Club Auth
+            </p>
           </a>
           <ProgressButton
             index={index}
             progress={progress}
             setProgress={setProgress}
           >
-            <img
-              src="next-white.png"
-              style={{ height: '3em' }}
-            />
+            <div className="vertical-float">
+              <p style={{ margin: 0, fontSize: '3em' }}>Click to Continue</p>
+              <img
+                src="decorative-bottom.png"
+                style={{ width: '400px', maxWidth: '100%', margin: '0 auto' }}
+              />
+            </div>
           </ProgressButton>
+          <div style={footerStyle}>
+            <p>© COPYWRONG THE HACK FOUNDATION</p>
+            <p>NO RIGHTS RESERVED</p>
+          </div>
         </div>
       </div>
       <FilmGrain />
