@@ -119,13 +119,37 @@ saveButton.addEventListener('click', () => {
         });
     }
 });
-document.addEventListener('keypress', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+document.addEventListener('keydown', (e) => {
+    if (!(e.ctrlKey || e.metaKey)) {
+        return;
+    }
+    const key = e.key.toLowerCase();
+    if (key === 'z') {
         e.preventDefault();
+        if (e.shiftKey) {
+            redo();
+        }
+        else {
+            undo();
+        }
+    }
+    if (key === 'y') {
+        e.preventDefault();
+        redo();
+    }
+}, true);
+
+window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin) {
+        return;
+    }
+    if (!event.data || event.data.type !== 'sketch-shortcut') {
+        return;
+    }
+    if (event.data.action === 'undo') {
         undo();
     }
-    if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
-        e.preventDefault();
+    if (event.data.action === 'redo') {
         redo();
     }
 });
