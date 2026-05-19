@@ -16,12 +16,14 @@ export default async function hcaStart(
   res: NextApiResponse
 ): Promise<void> {
   if (req.method !== 'GET') {
-    return res.status(405).send('Method not supported')
+    res.status(405).send('Method not supported')
+    return
   }
 
   const github = req.query.state
   if (!github || typeof github !== 'string') {
-    return res.status(400).send('Missing GitHub state')
+    res.status(400).send('Missing GitHub state')
+    return
   }
 
   const {
@@ -31,12 +33,14 @@ export default async function hcaStart(
   } = process.env
 
   if (!clientId || !redirectUri) {
-    return res.status(500).send('Hack Club auth is not configured')
+    res.status(500).send('Hack Club auth is not configured')
+    return
   }
 
   const secret = getStateSecret()
   if (!secret) {
-    return res.status(500).send('HCA state secret is not configured')
+    res.status(500).send('HCA state secret is not configured')
+    return
   }
 
   try {
@@ -69,9 +73,11 @@ export default async function hcaStart(
     authorizeUrl.searchParams.set('scope', HCA_SCOPES.join(' '))
     authorizeUrl.searchParams.set('state', oidcState)
 
-    return res.redirect(302, authorizeUrl.toString())
+    res.redirect(302, authorizeUrl.toString())
+    return
   } catch (error) {
     console.error(error)
-    return res.status(500).send('Hack Club authentication failed')
+    res.status(500).send('Hack Club authentication failed')
+    return
   }
 }

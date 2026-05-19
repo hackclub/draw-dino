@@ -38,14 +38,6 @@ const bannerStyle = {
   padding: '1em',
 }
 
-const footerStyle = {
-  fontSize: '0.5em',
-  textShadow: `
-1px 1px 1px #ddd,
-2px 2px 1px #ccc,
-0 0 1em black`,
-}
-
 const Slack: FC<SlackProps> = ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`

@@ -130,7 +130,12 @@ saveButton.addEventListener('click', () => {
   const filePrefix = urlParams['filePrefix']
 
   if (filename) {
-    canvas.toBlob((blob: Blob) => {
+    canvas.toBlob((blob: Blob | null) => {
+      if (!blob) {
+        sendMetric("increment", "errors.save_drawing", 1);
+        return;
+      }
+
       let safeFileName = `${filePrefix}-${filename}`.replace(/[^\w+]/g, '_')
 
       try {

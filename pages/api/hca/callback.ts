@@ -21,7 +21,6 @@ function isWebhookRequired(): boolean {
 }
 
 function authFailure(
-  req: NextApiRequest,
   res: NextApiResponse,
   message: string,
   error?: Error
@@ -47,13 +46,13 @@ export default async function hcaCallback(
 
   const { code, state } = req.query
   if (!code || !state || typeof code !== 'string' || typeof state !== 'string') {
-    authFailure(req, res, 'Missing code or state')
+    authFailure(res, 'Missing code or state')
     return
   }
 
   const secret = getStateSecret()
   if (!secret) {
-    authFailure(req, res, 'HCA state secret is not configured')
+    authFailure(res, 'HCA state secret is not configured')
     return
   }
 
@@ -61,36 +60,32 @@ export default async function hcaCallback(
   const savedState = verifySignedStateCookie(token, secret)
 
   if (!savedState) {
-    authFailure(req, res, 'Missing or invalid auth state cookie')
+    authFailure(res, 'Missing or invalid auth state cookie')
     return
   }
 
   if (Date.now() - Number(savedState.createdAt) > HCA_STATE_TTL_SECONDS * 1000) {
-    authFailure(req, res, 'Expired auth state cookie')
+    authFailure(res, 'Expired auth state cookie')
     return
   }
 
   if (savedState.oidcState !== state) {
-    authFailure(req, res, 'Invalid OIDC state')
+    authFailure(res, 'Invalid OIDC state')
     return
   }
 
   if (!savedState.github) {
-    authFailure(req, res, 'Missing GitHub state')
+    authFailure(res, 'Missing GitHub state')
     return
   }
 
   if (!process.env.HACKCLUB_REDIRECT_URI) {
-    authFailure(req, res, 'HACKCLUB_REDIRECT_URI is not configured')
+    authFailure(res, 'HACKCLUB_REDIRECT_URI is not configured')
     return
   }
 
   if (!process.env.HACKCLUB_CLIENT_ID || !process.env.HACKCLUB_CLIENT_SECRET) {
-    authFailure(
-      req,
-      res,
-      'Hack Club client credentials are not configured'
-    )
+    authFailure(res, 'Hack Club client credentials are not configured')
     return
   }
 
@@ -183,7 +178,11 @@ export default async function hcaCallback(
     res.status(200).send(bridgeHtml)
     return
   } catch (error) {
-    authFailure(req, res, 'Hack Club authentication failed', error instanceof Error ? error : new Error(String(error)))
+    authFailure(
+      res,
+      'Hack Club authentication failed',
+      error instanceof Error ? error : new Error(String(error))
+    )
     return
   }
 }

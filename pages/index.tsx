@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ReactNode } from 'react'
+import { FC, useState, useEffect } from 'react'
 import Scroll from 'react-scroll'
 
 import Step from '../components/step'
