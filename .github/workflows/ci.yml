@@ -1,4 +1,4 @@
-chorename: CI
+name: CI
 
 on:
   pull_request:
