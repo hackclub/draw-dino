@@ -1,7 +1,18 @@
+import { FC, ReactNode } from 'react'
 import ProgressButton from './progressButton'
 
+interface SplitProps {
+  subtitle?: string
+  image?: string
+  imageLink?: string
+  setProgress: (progress: number) => void
+  progress: number
+  index: number
+  children: ReactNode
+}
+
 const subStyle = {
-  fontStyle: 'italic',
+  fontStyle: 'italic' as const,
   opacity: 0.7,
 }
 
@@ -13,7 +24,7 @@ const imageStyle = {
 }
 
 const progressStyle = {
-  position: 'absolute',
+  position: 'absolute' as const,
   marginBottom: '10%',
   marginRight: '10%',
   bottom: 0,
@@ -21,7 +32,7 @@ const progressStyle = {
   width: '10em',
 }
 
-export default ({
+const Split: FC<SplitProps> = ({
   subtitle,
   image,
   imageLink,
@@ -117,3 +128,5 @@ export default ({
     </div>
   </>
 )
+
+export default Split

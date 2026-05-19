@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import Head from 'next/head'
 
-const fontImport = (family, weight, file) => `
+const fontImport = (family: string, weight: string | null, file: string) => `
 @font-face {
   font-family: '${family}';
   ${
@@ -15,7 +16,7 @@ const fontImport = (family, weight, file) => `
 }
 `
 
-export default () => (
+const Meta: FC = () => (
   <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -90,3 +91,5 @@ analytics.page();
     `}</style>
   </>
 )
+
+export default Meta

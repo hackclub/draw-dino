@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
   HCA_STATE_COOKIE,
   HCA_STATE_TTL_SECONDS,
@@ -14,12 +15,16 @@ const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
   'https://hooks.zapier.com/hooks/catch/507705/odyc4wo/'
 
-function isWebhookRequired() {
+function isWebhookRequired(): boolean {
   // Webhook failures should not block auth unless explicitly required.
   return process.env.HCA_REQUIRE_WEBHOOK === '1'
 }
 
-function authFailure(req, res, message, error) {
+function authFailure(
+  res: NextApiResponse,
+  message: string,
+  error?: Error
+): void {
   if (error) {
     console.error(error)
   } else {
@@ -30,7 +35,10 @@ function authFailure(req, res, message, error) {
   res.redirect(302, '/?hcaAuthError=1')
 }
 
-export default async function hcaCallback(req, res) {
+export default async function hcaCallback(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   if (req.method !== 'GET') {
     res.status(405).send('Method not supported')
     return
@@ -38,13 +46,13 @@ export default async function hcaCallback(req, res) {
 
   const { code, state } = req.query
   if (!code || !state || typeof code !== 'string' || typeof state !== 'string') {
-    authFailure(req, res, 'Missing code or state')
+    authFailure(res, 'Missing code or state')
     return
   }
 
   const secret = getStateSecret()
   if (!secret) {
-    authFailure(req, res, 'HCA state secret is not configured')
+    authFailure(res, 'HCA state secret is not configured')
     return
   }
 
@@ -52,36 +60,32 @@ export default async function hcaCallback(req, res) {
   const savedState = verifySignedStateCookie(token, secret)
 
   if (!savedState) {
-    authFailure(req, res, 'Missing or invalid auth state cookie')
+    authFailure(res, 'Missing or invalid auth state cookie')
     return
   }
 
   if (Date.now() - Number(savedState.createdAt) > HCA_STATE_TTL_SECONDS * 1000) {
-    authFailure(req, res, 'Expired auth state cookie')
+    authFailure(res, 'Expired auth state cookie')
     return
   }
 
   if (savedState.oidcState !== state) {
-    authFailure(req, res, 'Invalid OIDC state')
+    authFailure(res, 'Invalid OIDC state')
     return
   }
 
   if (!savedState.github) {
-    authFailure(req, res, 'Missing GitHub state')
+    authFailure(res, 'Missing GitHub state')
     return
   }
 
   if (!process.env.HACKCLUB_REDIRECT_URI) {
-    authFailure(req, res, 'HACKCLUB_REDIRECT_URI is not configured')
+    authFailure(res, 'HACKCLUB_REDIRECT_URI is not configured')
     return
   }
 
   if (!process.env.HACKCLUB_CLIENT_ID || !process.env.HACKCLUB_CLIENT_SECRET) {
-    authFailure(
-      req,
-      res,
-      'Hack Club client credentials are not configured'
-    )
+    authFailure(res, 'Hack Club client credentials are not configured')
     return
   }
 
@@ -174,7 +178,11 @@ export default async function hcaCallback(req, res) {
     res.status(200).send(bridgeHtml)
     return
   } catch (error) {
-    authFailure(req, res, 'Hack Club authentication failed', error)
+    authFailure(
+      res,
+      'Hack Club authentication failed',
+      error instanceof Error ? error : new Error(String(error))
+    )
     return
   }
 }

@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+import { NextApiRequest } from 'next'
 
 const HCA_AUTH_DISCOVERY_URL =
   process.env.HACKCLUB_AUTH_DISCOVERY_URL ||
@@ -14,9 +15,15 @@ export const HCA_SCOPES = [
   'verification_status',
 ]
 
-let discoveryPromise
+interface DiscoveryDocument {
+  token_endpoint: string
+  authorization_endpoint: string
+  userinfo_endpoint?: string
+}
 
-export async function getDiscovery() {
+let discoveryPromise: Promise<DiscoveryDocument> | null = null
+
+export async function getDiscovery(): Promise<DiscoveryDocument> {
   if (!discoveryPromise) {
     discoveryPromise = fetch(HCA_AUTH_DISCOVERY_URL).then(async (res) => {
       if (!res.ok) {
@@ -30,28 +37,29 @@ export async function getDiscovery() {
   return discoveryPromise
 }
 
-function base64UrlEncode(value) {
-  return Buffer.from(value)
+function base64UrlEncode(value: Buffer | string): string {
+  const buffer = typeof value === 'string' ? Buffer.from(value) : value
+  return buffer
     .toString('base64')
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=+$/g, '')
 }
 
-function base64UrlDecode(value) {
+function base64UrlDecode(value: string): string {
   const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
   const padLength = (4 - (normalized.length % 4)) % 4
   const padded = normalized + '='.repeat(padLength)
   return Buffer.from(padded, 'base64').toString('utf8')
 }
 
-function signPayload(payload, secret) {
+function signPayload(payload: string, secret: string): string {
   return base64UrlEncode(
     crypto.createHmac('sha256', secret).update(payload).digest()
   )
 }
 
-export function getStateSecret() {
+export function getStateSecret(): string | undefined {
   return (
     process.env.HCA_STATE_SECRET ||
     process.env.PASSPORT_SESSION_SECRET ||
@@ -59,13 +67,19 @@ export function getStateSecret() {
   )
 }
 
-export function createSignedStateCookie(value, secret) {
+interface StateValue {
+  github: string
+  oidcState: string
+  createdAt: number
+}
+
+export function createSignedStateCookie(value: StateValue, secret: string): string {
   const payload = base64UrlEncode(JSON.stringify(value))
   const signature = signPayload(payload, secret)
   return `${payload}.${signature}`
 }
 
-export function readCookie(req, name) {
+export function readCookie(req: NextApiRequest, name: string): string {
   const header = req.headers.cookie
   if (!header) return ''
 
@@ -80,7 +94,7 @@ export function readCookie(req, name) {
   return ''
 }
 
-export function verifySignedStateCookie(token, secret) {
+export function verifySignedStateCookie(token: string, secret: string): StateValue | null {
   if (!token) return null
 
   const [payload, signature] = token.split('.')
@@ -100,7 +114,15 @@ export function verifySignedStateCookie(token, secret) {
   }
 }
 
-export function serializeCookie(name, value, options = {}) {
+interface CookieOptions {
+  maxAge?: number
+  path?: string
+  sameSite?: 'Strict' | 'Lax' | 'None'
+  httpOnly?: boolean
+  secure?: boolean
+}
+
+export function serializeCookie(name: string, value: string, options: CookieOptions = {}): string {
   const attrs = [`${name}=${encodeURIComponent(value)}`]
 
   if (options.maxAge != null) attrs.push(`Max-Age=${options.maxAge}`)
@@ -112,7 +134,7 @@ export function serializeCookie(name, value, options = {}) {
   return attrs.join('; ')
 }
 
-export function clearStateCookieHeader() {
+export function clearStateCookieHeader(): string {
   return serializeCookie(HCA_STATE_COOKIE, '', {
     maxAge: 0,
     path: '/api/hca',
@@ -122,9 +144,16 @@ export function clearStateCookieHeader() {
   })
 }
 
-export async function exchangeCodeForTokens({ code, redirectUri }) {
-  const { token_endpoint: tokenEndpoint } = await getDiscovery()
-  const response = await fetch(tokenEndpoint, {
+interface TokenResponse {
+  access_token: string
+  id_token: string
+  token_type: string
+  expires_in: number
+}
+
+export async function exchangeCodeForTokens({ code, redirectUri }: { code: string; redirectUri: string }): Promise<TokenResponse> {
+  const discovery = await getDiscovery()
+  const response = await fetch(discovery.token_endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -146,7 +175,7 @@ export async function exchangeCodeForTokens({ code, redirectUri }) {
   return response.json()
 }
 
-export async function fetchUserInfo(accessToken) {
+export async function fetchUserInfo(accessToken: string): Promise<Record<string, any>> {
   const discovery = await getDiscovery()
   if (!discovery.userinfo_endpoint) return {}
 
@@ -163,7 +192,7 @@ export async function fetchUserInfo(accessToken) {
   return response.json()
 }
 
-export function parseJwtPayload(token) {
+export function parseJwtPayload(token: string): Record<string, any> {
   if (!token || typeof token !== 'string') return {}
 
   const parts = token.split('.')

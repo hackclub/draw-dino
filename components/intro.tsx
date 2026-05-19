@@ -1,17 +1,25 @@
+import { FC } from 'react'
 import ProgressButton from './progressButton'
 import packageJson from '../package.json'
 import FilmGrain from './filmGrain'
+
+interface IntroProps {
+  index: number
+  progress: number
+  setProgress: (progress: number) => void
+  github: string
+}
 
 const containerStyle = {
   width: '100%',
   height: '100vh',
   minHeight: '30em',
-  overflow: 'auto',
+  overflow: 'auto' as const,
   margin: 0,
   background: 'black',
   fontFamily: "'Bellefair', serif",
-  display: 'flex',
-  position: 'relative',
+  display: 'flex' as const,
+  position: 'relative' as const,
   alignItems: 'center',
   justifyContent: 'center',
 }
@@ -32,7 +40,7 @@ const footerStyle = {
 0 0 1em black`,
 }
 
-export default ({ index, progress, setProgress, github }) => (
+const Intro: FC<IntroProps> = ({ index, progress, setProgress, github }) => (
   <>
     <style jsx>{`
       @keyframes blur-in {
@@ -167,14 +175,14 @@ export default ({ index, progress, setProgress, github }) => (
             transform: 'rotate(270deg)',
           }}
         />
-        <p style={supertitleStyle}>“HACK CLUB PRESENTS”</p>
+        <p style={supertitleStyle}>"HACK CLUB PRESENTS"</p>
         <p>Orpheus the Dinosaur and {github} co-star in...</p>
         <h1 className="title">
-          “Draw a<br />
-          Dino”
+          "Draw a<br />
+          Dino"
         </h1>
         <p style={subtitleStyle}>
-          Or, An “Inter-Active” Primer to Submit Pull Requests
+          Or, An "Inter-Active" Primer to Submit Pull Requests
         </p>
         <ProgressButton
           index={index}
@@ -203,3 +211,5 @@ export default ({ index, progress, setProgress, github }) => (
     </div>
   </>
 )
+
+export default Intro

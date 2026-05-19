@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
 import Scroll from 'react-scroll'
 
 import Step from '../components/step'
@@ -11,20 +11,20 @@ import Split from '../components/split'
 import Selectable from '../components/selectable'
 
 const subtitleStyle = {
-  fontStyle: 'italic',
+  fontStyle: 'italic' as const,
   opacity: 0.6,
 }
 
 const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
 const GITHUB_SESSION_USERNAME_KEY = 'draw-dino:github-username'
 
-export default () => {
-  const [dinoName, setDinoName] = useState('')
-  const [progress, setProgress] = useState(0)
-  const [github, setGithub] = useState('github-user')
-  const [inviteStatus, setInviteStatus] = useState('')
-  const [showAuthToast, setShowAuthToast] = useState(false)
-  const [githubAuthError, setGithubAuthError] = useState('')
+const Home: FC = () => {
+  const [dinoName, setDinoName] = useState<string>('')
+  const [progress, setProgress] = useState<number>(0)
+  const [github, setGithub] = useState<string>('github-user')
+  const [inviteStatus, setInviteStatus] = useState<string>('')
+  const [showAuthToast, setShowAuthToast] = useState<boolean>(false)
+  const [githubAuthError, setGithubAuthError] = useState<string>('')
 
   const slack = true
 
@@ -49,7 +49,7 @@ export default () => {
       const code = params.get('code')
       const state = params.get('state')
 
-      const cleanUrlParams = (keys) => {
+      const cleanUrlParams = (keys: string[]) => {
         let changed = false
         keys.forEach((key) => {
           if (params.has(key)) {
@@ -156,13 +156,13 @@ export default () => {
 
     syncAuthState()
 
-    const onStorage = (event) => {
+    const onStorage = (event: StorageEvent) => {
       if (event.key === 'draw-dino:hca-auth-success' && event.newValue) {
         handleAuthSuccess()
       }
     }
 
-    const onMessage = (event) => {
+    const onMessage = (event: MessageEvent) => {
       if (event.data && event.data.type === 'hca-auth-success') {
         handleAuthSuccess()
       }
@@ -370,7 +370,7 @@ export default () => {
             <a target="_blank" href="https://github.com/hackclub/dinosaurs">
               https://github.com/hackclub/dinosaurs
             </a>{' '}
-            and click “star”. This bookmarks the repository in GitHub.
+            and click "star". This bookmarks the repository in GitHub.
           </p>
           <p>Afterwards, tab back to this page to continue.</p>
         </Split>
@@ -386,11 +386,11 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Find and click the dropdown “Branch: main ▼”.</p>
+          <p>Find and click the dropdown "Branch: main ▼".</p>
           <p>
             Type in <Selectable>{getName()}</Selectable>
           </p>
-          <p>Click “Create branch: {getName()}”</p>
+          <p>Click "Create branch: {getName()}"</p>
         </Split>
       </Step>
       {console.log(index++)}
@@ -404,9 +404,9 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Click “Add file” and add your dino image</p>
+          <p>Click "Add file" and add your dino image</p>
           <p>
-            Below “Commit changes”, type this into the first text box:
+            Below "Commit changes", type this into the first text box:
             <Selectable>Add {getFilename()}</Selectable>
           </p>
           <p>
@@ -432,7 +432,7 @@ export default () => {
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Scroll through the list of files & find “README.md”.</p>
+          <p>Scroll through the list of files & find "README.md".</p>
           <p>
             To edit the file, click it & click the <img src="github-edit.svg" />{' '}
             icon.
@@ -458,7 +458,7 @@ export default () => {
             ![]({getFilename()})
           </Selectable>
           <p>
-            Below “Commit changes”, type{' '}
+            Below "Commit changes", type{' '}
             <Selectable>Add {getName()} to README</Selectable> in the first text
             box
           </p>
@@ -507,3 +507,5 @@ export default () => {
     </>
   )
 }
+
+export default Home
