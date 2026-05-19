@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import Scroll from 'react-scroll'
 
 interface SketchEmbedProps {
@@ -33,6 +33,8 @@ const continueMessage = {
 }
 
 const SketchEmbed: FC<SketchEmbedProps> = ({ setDinoName, progress, index, setProgress, filePrefix }) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       if (e.data.filename && e.data.blob) {
@@ -46,10 +48,32 @@ const SketchEmbed: FC<SketchEmbedProps> = ({ setDinoName, progress, index, setPr
       }
     }
 
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return
+
+      const key = e.key.toLowerCase()
+      const action =
+        key === 'y' || (key === 'z' && e.shiftKey)
+          ? 'redo'
+          : key === 'z'
+            ? 'undo'
+            : null
+
+      if (!action) return
+
+      e.preventDefault()
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: 'sketch-shortcut', action },
+        window.location.origin
+      )
+    }
+
     window.addEventListener('message', handleMessage, false)
+    window.addEventListener('keydown', handleKeydown, true)
 
     return () => {
       window.removeEventListener('message', handleMessage)
+      window.removeEventListener('keydown', handleKeydown, true)
     }
   }, [progress, index, setProgress, setDinoName])
 
@@ -59,6 +83,8 @@ const SketchEmbed: FC<SketchEmbedProps> = ({ setDinoName, progress, index, setPr
         Finish and save your dino drawing to continue
       </p>
       <iframe
+        ref={iframeRef}
+        title="Dino sketch pad"
         src={`sketch.html?filePrefix=${filePrefix}`}
         style={iframeStyle}
       />
