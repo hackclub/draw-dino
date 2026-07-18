@@ -381,16 +381,16 @@ const Home: FC = () => {
         <Split
           image="steps/new-branch.gif"
           imageLink="steps/new-branch.mp4"
-          subtitle="Create Branch: drawing-dino"
+          subtitle="Create Fork: drawing-dino"
           index={index}
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Find and click the dropdown "Branch: main ▼".</p>
+          <p>Click on "Fork ▼".</p>
           <p>
-            Type in <Selectable>{getName()}</Selectable>
+            Type in <Selectable>{getName()}</Selectable> into the 'Repository name' box
           </p>
-          <p>Click "Create branch: {getName()}"</p>
+          <p>Click "Create Fork"!</p>
         </Split>
       </Step>
       {console.log(index++)}
