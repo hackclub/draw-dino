@@ -480,20 +480,20 @@ const Home: FC = () => {
           setProgress={setProgress}
         >
           <p>
-            Go back to{' '}
-            <a target="_blank" href="https://github.com/hackclub/dinosaurs">
-              https://github.com/hackclub/dinosaurs
-            </a>{' '}
-            and click{' '}
-            <span style={{ color: 'rgb(52, 208, 88)' }}>
-              Compare & pull request
+            Go back to your fork of the repo
+            and click Contribute then{' '}
+            <span style={{ color: 'rgb(31, 111, 235)' }}>
+              Open Pull Request
             </span>
             .
           </p>
           <p>
             {' '}
-            Then click{' '}
-            <span style={{ color: 'rgb(52, 208, 88)' }}>
+            Write <Selectable>Add {getName()}</Selectable> as the title.
+          </p>
+          <p>
+             Then scroll down and click{' '}
+            <span style={{ color: 'rgb(31, 111, 235)' }}>
               Create pull request
             </span>
           </p>
