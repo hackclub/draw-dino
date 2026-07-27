@@ -381,16 +381,16 @@ const Home: FC = () => {
         <Split
           image="steps/new-branch.gif"
           imageLink="steps/new-branch.mp4"
-          subtitle="Create Branch: drawing-dino"
+          subtitle="Create Fork: drawing-dino"
           index={index}
           progress={progress}
           setProgress={setProgress}
         >
-          <p>Find and click the dropdown "Branch: main ▼".</p>
+          <p>Click on "Fork ▼".</p>
           <p>
-            Type in <Selectable>{getName()}</Selectable>
+            Type in <Selectable>{getName()}</Selectable> into the "Repository name" box.
           </p>
-          <p>Click "Create branch: {getName()}"</p>
+          <p>Click "Create Fork"!</p>
         </Split>
       </Step>
       {console.log(index++)}
@@ -480,20 +480,20 @@ const Home: FC = () => {
           setProgress={setProgress}
         >
           <p>
-            Go back to{' '}
-            <a target="_blank" href="https://github.com/hackclub/dinosaurs">
-              https://github.com/hackclub/dinosaurs
-            </a>{' '}
-            and click{' '}
-            <span style={{ color: 'rgb(52, 208, 88)' }}>
-              Compare & pull request
+            Go back to your fork of the repo
+            and click Contribute then{' '}
+            <span style={{ color: 'rgb(31, 111, 235)' }}>
+              Open Pull Request
             </span>
             .
           </p>
           <p>
             {' '}
-            Then click{' '}
-            <span style={{ color: 'rgb(52, 208, 88)' }}>
+            Write <Selectable>Add {getName()}</Selectable> as the title.
+          </p>
+          <p>
+             Then scroll down and click{' '}
+            <span style={{ color: 'rgb(31, 111, 235)' }}>
               Create pull request
             </span>
           </p>
