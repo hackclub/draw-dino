@@ -388,7 +388,7 @@ const Home: FC = () => {
         >
           <p>Click on "Fork ▼".</p>
           <p>
-            Type in <Selectable>{getName()}</Selectable> into the 'Repository name' box
+            Type in <Selectable>{getName()}</Selectable> into the "Repository name" box.
           </p>
           <p>Click "Create Fork"!</p>
         </Split>
