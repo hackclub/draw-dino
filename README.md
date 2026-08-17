@@ -19,3 +19,7 @@ Before committing, make sure to run the built-in formatter:
 ```sh
 $ bun run fmt
 ```
+
+"github_user_dino"
+
+![](github_user_dino.png)
