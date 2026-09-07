@@ -25,6 +25,7 @@ const Home: FC = () => {
   const [inviteStatus, setInviteStatus] = useState<string>('')
   const [showAuthToast, setShowAuthToast] = useState<boolean>(false)
   const [githubAuthError, setGithubAuthError] = useState<string>('')
+  const [needsGithubManual, setNeedsGithubManual] = useState<boolean>(false)
 
   const slack = true
 
@@ -85,6 +86,7 @@ const Home: FC = () => {
 
       if (storedUsername) {
         setGithub(storedUsername)
+        setNeedsGithubManual(false)
         setGithubAuthError('')
         return
       }
@@ -95,6 +97,7 @@ const Home: FC = () => {
           usernameParam
         )
         setGithub(usernameParam)
+        setNeedsGithubManual(false)
         setGithubAuthError('')
         return
       }
@@ -116,10 +119,8 @@ const Home: FC = () => {
           const payload = await response.json().catch(() => null)
 
           if (!response.ok) {
-            setGithubAuthError(
-              (payload && payload.error) ||
-                'GitHub sign-in failed while exchanging the OAuth code.'
-            )
+            setNeedsGithubManual(true)
+            setGithub('')
             return
           }
 
@@ -129,15 +130,16 @@ const Home: FC = () => {
               payload.username
             )
             setGithub(payload.username)
+            setNeedsGithubManual(false)
             setGithubAuthError('')
           } else {
-            setGithubAuthError(
-              'GitHub sign-in succeeded but no username returned.'
-            )
+            setNeedsGithubManual(true)
+            setGithub('')
           }
         } catch (error) {
           console.error(error)
-          setGithubAuthError('GitHub sign-in failed. Please try again.')
+          setNeedsGithubManual(true)
+          setGithub('')
         } finally {
           cleanUrlParams(['code', 'state', 'iss'])
         }
@@ -150,7 +152,8 @@ const Home: FC = () => {
           `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=read:user`
         )
       } else {
-        setGithubAuthError('NEXT_PUBLIC_GITHUB_CLIENT_ID is not configured.')
+        setNeedsGithubManual(true)
+        setGithub('')
       }
     }
 
@@ -254,6 +257,8 @@ const Home: FC = () => {
           index={index}
           progress={progress}
           github={github}
+          setGithub={setGithub}
+          needsGithubManual={needsGithubManual}
         />
       </Step>
       {console.log(index++)}
@@ -349,6 +354,11 @@ const Home: FC = () => {
                 </a>
                 . If it doesn't show up there, check your email.
               </p>
+              <p style={subtitleStyle}>
+                GitHub org invites are temporarily disabled (they'll be back
+                soon!). In the meantime, please DM @mat saying that you want to
+                be added (and if needed urgently, why).
+              </p>
               <p>Go to the next step once you've accepted your invite.</p>
             </Split>
           </Step>
@@ -388,7 +398,8 @@ const Home: FC = () => {
         >
           <p>Click on "Fork ▼".</p>
           <p>
-            Type in <Selectable>{getName()}</Selectable> into the "Repository name" box.
+            Type in <Selectable>{getName()}</Selectable> into the "Repository
+            name" box.
           </p>
           <p>Click "Create Fork"!</p>
         </Split>
@@ -480,8 +491,7 @@ const Home: FC = () => {
           setProgress={setProgress}
         >
           <p>
-            Go back to your fork of the repo
-            and click Contribute then{' '}
+            Go back to your fork of the repo and click Contribute then{' '}
             <span style={{ color: 'rgb(31, 111, 235)' }}>
               Open Pull Request
             </span>
@@ -492,7 +502,7 @@ const Home: FC = () => {
             Write <Selectable>Add {getName()}</Selectable> as the title.
           </p>
           <p>
-             Then scroll down and click{' '}
+            Then scroll down and click{' '}
             <span style={{ color: 'rgb(31, 111, 235)' }}>
               Create pull request
             </span>
