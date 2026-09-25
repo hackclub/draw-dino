@@ -1,12 +1,7 @@
-import { Octokit } from '@octokit/core'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
 const GITHUB_USER_URL = 'https://api.github.com/user'
-
-const octokit = new Octokit({
-  auth: process.env.GITHUB_FOR_DINOISSEUR_PAT,
-})
 
 interface TokenPayload {
   access_token?: string
@@ -20,17 +15,17 @@ interface UserPayload {
 
 export default async function githubExchange(
   req: NextApiRequest,
-  res: NextApiResponse<{ error?: string; username?: string; inviteStatus?: string }>
+  res: NextApiResponse<{ error?: string; username?: string }>
 ): Promise<void> {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not supported' })
   }
 
-  const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
-  const clientSecret = process.env.GITHUB_CLIENT_SECRET
+  const clientId = process.env.NEXT_PUBLIC_GITHUB_APP_CLIENT_ID
+  const clientSecret = process.env.GITHUB_APP_CLIENT_SECRET
 
   if (!clientId || !clientSecret) {
-    return res.status(500).json({ error: 'GitHub OAuth is not configured' })
+    return res.status(500).json({ error: 'GitHub App is not configured' })
   }
 
   const { code, redirectUri } = req.body || {}
@@ -78,17 +73,7 @@ export default async function githubExchange(
       })
     }
 
-    const invite = await octokit.request('PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', {
-      org: 'hackclub',
-      team_slug: 'Dinoisseurs',
-      username: userPayload.login,
-      role: 'member',
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-    })
-
-    return res.status(200).json({ username: userPayload.login, inviteStatus: invite.data.state })
+    return res.status(200).json({ username: userPayload.login })
   } catch (error) {
     console.error(error)
     return res.status(500).json({ error: 'GitHub exchange request failed' })

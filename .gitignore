@@ -21,6 +21,7 @@ next-env.d.ts
 .DS_Store
 .env
 .env.local
+.env.prod
 
 # debug
 npm-debug.log*

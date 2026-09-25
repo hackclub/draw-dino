@@ -15,7 +15,7 @@ const subtitleStyle = {
   opacity: 0.6,
 }
 
-const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
+const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_APP_CLIENT_ID
 const GITHUB_SESSION_USERNAME_KEY = 'draw-dino:github-username'
 
 const Home: FC = () => {

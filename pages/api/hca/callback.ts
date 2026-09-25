@@ -10,6 +10,7 @@ import {
   readCookie,
   verifySignedStateCookie,
 } from './_lib'
+import { inviteToDinoisseurTeam } from '../github/_invite'
 
 const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
@@ -134,6 +135,8 @@ export default async function hcaCallback(
       }
       console.error(webhookError)
     }
+
+    await inviteToDinoisseurTeam(savedState.github)
 
     res.setHeader('Set-Cookie', clearStateCookieHeader())
 
